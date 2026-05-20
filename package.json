@@ -1,14 +1,23 @@
 {
-  "name": "theweather",
+  "private": true,
+  "name": "the-weather",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "npm run lint-typecheck && npm run lint-eslint && npm run lint-prettier && npm run lint-knip",
+    "lint-typecheck": "tsc --noEmit",
+    "lint-eslint": "eslint .",
+    "lint-prettier": "prettier --check .",
+    "lint-knip": "knip"
   },
   "dependencies": {
+    "@christopherjbaker/eslint-config": "^3.1.4",
+    "eslint": "^9.39.4",
     "expo": "~54.0.33",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
@@ -16,7 +25,8 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "knip": "^6.14.1",
+    "prettier": "^3.8.3",
     "typescript": "~5.9.2"
-  },
-  "private": true
+  }
 }
