@@ -2,17 +2,15 @@ import {
   OPEN_METEO_CURRENT_PARAMS,
   OPEN_METEO_DAILY_PARAMS,
   OPEN_METEO_FORECAST_URL,
-} from "@/hooks/useOpenMeteoForecast/constants"
+} from "./constants"
 import {
   type ForecastLocation,
   type OpenMeteoCurrent,
   type OpenMeteoForecast,
   type OpenMeteoForecastResponse,
-} from "@/hooks/useOpenMeteoForecast/types"
+} from "./types"
 
-export const getOpenMeteoForecastUrl = (
-  location: ForecastLocation,
-): string => {
+export const getOpenMeteoForecastUrl = (location: ForecastLocation): string => {
   const params = new URLSearchParams({
     current: OPEN_METEO_CURRENT_PARAMS,
     daily: OPEN_METEO_DAILY_PARAMS,

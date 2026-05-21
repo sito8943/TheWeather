@@ -5,7 +5,7 @@ import { Card } from "@/components"
 import {
   type OpenMeteoLocation,
   type OpenMeteoCurrent,
-} from "./hooks/useOpenMeteoForecast/types"
+} from "@/hooks/useOpenMeteoForecast"
 
 const CurrentWeather: React.FC<{
   location: OpenMeteoLocation
