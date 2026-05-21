@@ -1,3 +1,3 @@
-import useOpenMeteoForecast from "@/hooks/useOpenMeteoForecast/useOpenMeteoForecast"
+import useOpenMeteoForecast from "./useOpenMeteoForecast"
 
 export default useOpenMeteoForecast

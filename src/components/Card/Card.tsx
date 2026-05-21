@@ -1,11 +1,9 @@
-import { type ReactElement, type ReactNode } from "react"
+import { type ReactElement } from "react"
 import { Platform, StyleSheet, View } from "react-native"
 
-export default function Card({
-  children,
-}: {
-  children: ReactNode
-}): ReactElement {
+import { type CardPropsType } from "./types"
+
+export default function Card({ children }: CardPropsType): ReactElement {
   return <View style={styles.container}>{children}</View>
 }
 

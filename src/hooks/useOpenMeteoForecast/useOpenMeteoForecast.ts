@@ -2,10 +2,15 @@ import { useEffect, useState } from "react"
 
 import {
   type ForecastLocation,
-  type OpenMeteoForecast,
+  type OpenMeteoForecastResponse,
   type UseOpenMeteoForecastState,
-} from "@/hooks/useOpenMeteoForecast/types"
-import { getOpenMeteoForecastUrl } from "@/hooks/useOpenMeteoForecast/utils"
+} from "./types"
+
+import {
+  getOpenMeteoForecastUrl,
+  mapOpenMeteoCurrent,
+  mapOpenMeteoForecast,
+} from "./utils"
 
 export default function useOpenMeteoForecast(
   location: ForecastLocation | null,
@@ -29,8 +34,7 @@ export default function useOpenMeteoForecast(
       return
     }
 
-    const controller = new AbortController()
-    const forecastLocation = { latitude, longitude }
+    const forecastLocation: ForecastLocation = { latitude, longitude }
 
     setState((currentState) => ({
       ...currentState,
@@ -40,29 +44,23 @@ export default function useOpenMeteoForecast(
 
     const fetchForecast = async (): Promise<void> => {
       try {
-        const response = await fetch(
-          getOpenMeteoForecastUrl(forecastLocation),
-          {
-            signal: controller.signal,
-          },
-        )
+        const response = await fetch(getOpenMeteoForecastUrl(forecastLocation))
 
         if (!response.ok) {
           throw new Error(`Open-Meteo request failed: ${response.status}`)
         }
 
-        const data = (await response.json()) as OpenMeteoForecast
+        const data = (await response.json()) as OpenMeteoForecastResponse
 
         setState({
-          data,
+          data: {
+            forecast: mapOpenMeteoForecast(data.daily),
+            current: mapOpenMeteoCurrent(data.current),
+          },
           error: null,
           isLoading: false,
         })
       } catch (error) {
-        if (controller.signal.aborted) {
-          return
-        }
-
         setState({
           data: null,
           error: error instanceof Error ? error : new Error(String(error)),
@@ -72,10 +70,6 @@ export default function useOpenMeteoForecast(
     }
 
     void fetchForecast()
-
-    return () => {
-      controller.abort()
-    }
   }, [latitude, longitude])
 
   return state

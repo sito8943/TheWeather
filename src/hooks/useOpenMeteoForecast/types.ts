@@ -1,34 +1,51 @@
 export type OpenMeteoLocation = {
   latitude: number
   longitude: number
+  name: string
 }
 
-export type ForecastLocation = OpenMeteoLocation
+export type ForecastLocation = Omit<OpenMeteoLocation, "name">
 
 export type OpenMeteoForecast = {
+  day: string
+  temperatureMax: number
+  temperatureMin: number
+  condition: number
+}
+
+export type OpenMeteoCurrent = {
+  condition: number
+  temperature: number
+  isDay: boolean
+  wind: number
+  humidity: number
+  uv: number
+}
+
+export type OpenMeteoForecastResponse = {
   daily: {
     time: string[]
     temperature_2m_max: number[]
     temperature_2m_min: number[]
     weather_code: number[]
   }
-  daily_units: {
-    time: string
-    temperature_2m_max: string
-    temperature_2m_min: string
-    weather_code: string
+  current: {
+    weather_code: number
+    temperature_2m: number
+    is_day: number
+    wind_speed_10m: number
+    relative_humidity_2m: number
+    uv_index: number
   }
-  elevation: number
-  generationtime_ms: number
-  latitude: number
-  longitude: number
-  timezone: string
-  timezone_abbreviation: string
-  utc_offset_seconds: number
+}
+
+type OpenMeteoData = {
+  current: OpenMeteoCurrent
+  forecast: OpenMeteoForecast[]
 }
 
 export type UseOpenMeteoForecastState = {
-  data: OpenMeteoForecast | null
+  data: OpenMeteoData | null
   error: Error | null
   isLoading: boolean
 }
