@@ -5,13 +5,18 @@ import { StyleSheet, Text, View } from "react-native"
 export default function App(): ReactElement {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text style={styles.header}>The Weather</Text>
       <StatusBar style="auto" />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
   container: {
     flex: 1,
     backgroundColor: "#fff",
