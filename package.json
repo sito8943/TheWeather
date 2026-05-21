@@ -6,10 +6,12 @@
   "type": "module",
   "scripts": {
     "lint": "npm run lint-typecheck && npm run lint-eslint && npm run lint-prettier && npm run lint-knip",
+    "lint:fix": "eslint --fix .",
     "lint-typecheck": "tsc --noEmit",
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-knip": "knip",
+    "prettier:format": "prettier --write .",
     "start": "expo start"
   },
   "dependencies": {
