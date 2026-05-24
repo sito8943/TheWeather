@@ -1,8 +1,8 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 
-import { Card } from "@/components"
+import Card from "#shared/design/Card"
 
-import { type OpenMeteoForecast } from "./hooks/useOpenMeteoForecast/types"
+import { type OpenMeteoForecast } from "./types"
 
 const Forecast: React.FC<{
   data?: OpenMeteoForecast[]

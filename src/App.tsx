@@ -2,10 +2,7 @@ import { StatusBar } from "expo-status-bar"
 import { type ReactElement } from "react"
 import { StyleSheet, Text, View } from "react-native"
 
-import { useOpenMeteoForecast } from "@/hooks"
-
-import CurrentWeather from "./CurrentWeather"
-import Forecast from "./Forecast"
+import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 const location = { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 }
 

@@ -1,11 +1,8 @@
 import { StyleSheet, Text, View } from "react-native"
 
-import { Card } from "@/components"
+import Card from "#shared/design/Card"
 
-import {
-  type OpenMeteoLocation,
-  type OpenMeteoCurrent,
-} from "@/hooks/useOpenMeteoForecast"
+import { type OpenMeteoCurrent, type OpenMeteoLocation } from "./types"
 
 const CurrentWeather: React.FC<{
   location: OpenMeteoLocation
