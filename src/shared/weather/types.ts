@@ -1,3 +1,5 @@
+import { type Weather } from "./toWeather"
+
 export type OpenMeteoLocation = {
   latitude: number
   longitude: number
@@ -10,11 +12,11 @@ export type OpenMeteoForecast = {
   day: string
   temperatureMax: number
   temperatureMin: number
-  condition: number
+  condition: Weather
 }
 
 export type OpenMeteoCurrent = {
-  condition: number
+  condition: Weather
   temperature: number
   isDay: boolean
   wind: number

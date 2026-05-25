@@ -3,6 +3,7 @@ import {
   OPEN_METEO_DAILY_PARAMS,
   OPEN_METEO_FORECAST_URL,
 } from "./constants"
+import toWeather from "./toWeather"
 import {
   type ForecastLocation,
   type OpenMeteoCurrent,
@@ -24,7 +25,7 @@ export const getOpenMeteoForecastUrl = (location: ForecastLocation): string => {
 export const mapOpenMeteoCurrent = (
   current: OpenMeteoForecastResponse["current"],
 ): OpenMeteoCurrent => ({
-  condition: current.weather_code,
+  condition: toWeather(current.weather_code),
   temperature: current.temperature_2m,
   isDay: current.is_day === 1,
   wind: current.wind_speed_10m,
@@ -39,5 +40,5 @@ export const mapOpenMeteoForecast = (
     day,
     temperatureMax: daily.temperature_2m_max[i],
     temperatureMin: daily.temperature_2m_min[i],
-    condition: daily.weather_code[i],
+    condition: toWeather(daily.weather_code[i]),
   }))
