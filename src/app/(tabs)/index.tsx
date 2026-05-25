@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar"
 import { type ReactElement } from "react"
 import { StyleSheet, Text, View } from "react-native"
 
@@ -6,7 +5,7 @@ import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 const location = { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 }
 
-export default function App(): ReactElement {
+export default function Home(): ReactElement {
   const { data } = useOpenMeteoForecast(location)
 
   return (
@@ -15,8 +14,6 @@ export default function App(): ReactElement {
 
       <CurrentWeather location={location} data={data?.current} />
       <Forecast data={data?.forecast} />
-
-      <StatusBar style="auto" />
     </View>
   )
 }
