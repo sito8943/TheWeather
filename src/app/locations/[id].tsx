@@ -62,7 +62,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: spacing.between,
   },
-  header: {
-    marginBottom: spacing.between,
-  },
 })
