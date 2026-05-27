@@ -1,16 +1,11 @@
 import { router } from "expo-router"
 import { type ReactElement, useState } from "react"
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native"
+import { Pressable, ScrollView, StyleSheet, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Card from "#design/elements/Card"
+import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { colors, shapes, spacing } from "#design/foundations"
 import { searchLocations } from "#shared/locations"
@@ -32,7 +27,6 @@ export default function Explore(): ReactElement {
         <TextInput
           onChangeText={setQuery}
           placeholder="Search locations"
-          placeholderTextColor={colors.muted}
           style={styles.searchInput}
           value={query}
         />
@@ -107,13 +101,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   searchInput: {
-    borderColor: colors.muted,
-    borderRadius: shapes.borderRadius,
-    borderWidth: 1,
-    color: colors.body,
     marginBottom: spacing.between,
-    paddingHorizontal: spacing.between,
-    paddingVertical: spacing.sm,
-    width: "100%",
   },
 })
