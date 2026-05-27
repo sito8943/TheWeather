@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typography"
 import { colors, spacing } from "#design/foundations"
-import { findLocationById } from "#shared/locations"
+import { findLocationById, findSavedLocationById } from "#shared/locations"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 export default function LocationDetails(): ReactElement {
@@ -12,6 +12,8 @@ export default function LocationDetails(): ReactElement {
   const locationId = Array.isArray(id) ? id[0] : id
   const location =
     locationId === undefined ? undefined : findLocationById(locationId)
+  const savedLocation =
+    locationId === undefined ? undefined : findSavedLocationById(locationId)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
@@ -30,7 +32,11 @@ export default function LocationDetails(): ReactElement {
       showsVerticalScrollIndicator={false}
     >
       <Stack.Screen options={{ title: location.name }} />
-      <CurrentWeather data={data?.current} location={location} />
+      <CurrentWeather
+        data={data?.current}
+        location={location}
+        locationColor={savedLocation?.color}
+      />
       <Forecast data={data?.forecast} />
     </ScrollView>
   )

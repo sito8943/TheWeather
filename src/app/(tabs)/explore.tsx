@@ -8,7 +8,7 @@ import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { colors, shapes, spacing } from "#design/foundations"
-import { searchLocations } from "#shared/locations"
+import { findSavedLocationById, searchLocations } from "#shared/locations"
 
 export default function Explore(): ReactElement {
   const [query, setQuery] = useState("")
@@ -38,24 +38,36 @@ export default function Explore(): ReactElement {
         ) : null}
 
         <View style={styles.catalogContainer}>
-          {results.map((location) => (
-            <Pressable
-              key={location.id}
-              onPress={() => {
-                router.push({
-                  params: { id: location.id },
-                  pathname: "/locations/[id]",
-                })
-              }}
-              style={styles.gridItem}
-            >
-              <Card style={[styles.catalogCard]}>
-                <View style={styles.row}>
-                  <Typography>{location.name}</Typography>
-                </View>
-              </Card>
-            </Pressable>
-          ))}
+          {results.map((location) => {
+            const savedColor = findSavedLocationById(location.id)?.color
+            return (
+              <Pressable
+                key={location.id}
+                onPress={() => {
+                  router.push({
+                    params: { id: location.id },
+                    pathname: "/locations/[id]",
+                  })
+                }}
+                style={styles.gridItem}
+              >
+                <Card
+                  style={[
+                    styles.catalogCard,
+                    savedColor === undefined
+                      ? undefined
+                      : { borderColor: savedColor },
+                  ]}
+                >
+                  <View style={styles.row}>
+                    <Typography style={{ color: savedColor }}>
+                      {location.name}
+                    </Typography>
+                  </View>
+                </Card>
+              </Pressable>
+            )
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>

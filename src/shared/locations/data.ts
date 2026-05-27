@@ -1,43 +1,41 @@
-import { type Location, type LocationId } from "./types"
+import {
+  type Location,
+  type LocationId,
+  type SavedLocation,
+} from "./types"
 
 export const locationCatalog: Location[] = [
   {
-    color: "#c2410c",
     id: "barcelona",
     latitude: 41.385063,
     longitude: 2.173404,
     name: "Barcelona",
   },
   {
-    color: "#1d4ed8",
     id: "madrid",
     latitude: 40.416775,
     longitude: -3.70379,
     name: "Madrid",
   },
   {
-    color: "#0f766e",
     id: "valencia",
     latitude: 39.46975,
     longitude: -0.37739,
     name: "Valencia",
   },
   {
-    color: "#b45309",
     id: "sevilla",
     latitude: 37.389092,
     longitude: -5.984459,
     name: "Sevilla",
   },
   {
-    color: "#7c3aed",
     id: "bilbao",
     latitude: 43.263012,
     longitude: -2.934985,
     name: "Bilbao",
   },
   {
-    color: "#be185d",
     id: "malaga",
     latitude: 36.721302,
     longitude: -4.421637,
@@ -45,18 +43,26 @@ export const locationCatalog: Location[] = [
   },
 ]
 
-export const savedLocationIds: LocationId[] = [
-  "barcelona",
-  "madrid",
-  "valencia",
-]
+const savedColorById: Record<LocationId, string> = {
+  barcelona: "#c2410c",
+  madrid: "#1d4ed8",
+  valencia: "#0f766e",
+}
 
-export const savedLocations: Location[] = locationCatalog.filter((location) =>
-  savedLocationIds.includes(location.id),
-)
+export const savedLocationIds: LocationId[] = Object.keys(savedColorById)
+
+export const savedLocations: SavedLocation[] = locationCatalog
+  .filter((location) => savedLocationIds.includes(location.id))
+  .map((location) => ({ ...location, color: savedColorById[location.id] }))
 
 export function findLocationById(id: string): Location | undefined {
   return locationCatalog.find((location) => location.id === id)
+}
+
+export function findSavedLocationById(
+  id: string,
+): SavedLocation | undefined {
+  return savedLocations.find((location) => location.id === id)
 }
 
 export function searchLocations(query: string): Location[] {
