@@ -10,13 +10,18 @@ const Forecast: React.FC<{
   data?: OpenMeteoForecast[]
 }> = ({ data }) => {
   return (
-    <Card>
-      <ScrollView horizontal style={styles.days}>
+    <Card style={styles.card}>
+      <ScrollView style={styles.days}>
         {data?.map(({ day, temperatureMax, temperatureMin, condition }) => (
           <View key={day} style={styles.day}>
-            <Typography variant="large">{temperatureMax} C</Typography>
-            <Typography variant="muted">{temperatureMin} C</Typography>
-            <Typography variant="label">{condition}</Typography>
+            <Typography variant="label">{day}</Typography>
+            <View style={styles.info}>
+              <View style={styles.temperatures}>
+                <Typography variant="muted">{temperatureMax} C</Typography>
+                <Typography variant="muted">{temperatureMin} C</Typography>
+              </View>
+              <Typography variant="label">{condition}</Typography>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -27,10 +32,23 @@ const Forecast: React.FC<{
 export default Forecast
 
 const styles = StyleSheet.create({
-  days: { flexGrow: 0, flexDirection: "row" },
+  card: {
+    width: "100%",
+  },
+  days: { flexGrow: 0, width: "100%" },
   day: {
+    width: "100%",
+    flexDirection: "row",
     alignItems: "center",
-    flex: 1,
-    marginHorizontal: spacing.between,
+    justifyContent: "space-between",
+    marginVertical: spacing.sm,
+  },
+  info: {
+    alignItems: "flex-end",
+  },
+  temperatures: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
   },
 })

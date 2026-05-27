@@ -2,6 +2,8 @@ import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 
+import { SafeAreaView } from "react-native-safe-area-context"
+
 import Typography from "#design/elements/Typography"
 import { colors, spacing } from "#design/foundations"
 import { findLocationById, findSavedLocationById } from "#shared/locations"
@@ -26,19 +28,20 @@ export default function LocationDetails(): ReactElement {
   }
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.content}
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
-      <Stack.Screen options={{ title: location.name }} />
-      <CurrentWeather
-        data={data?.current}
-        location={location}
-        locationColor={savedLocation?.color}
-      />
-      <Forecast data={data?.forecast} />
-    </ScrollView>
+    <SafeAreaView edges={["top", "bottom"]} style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <Stack.Screen options={{ title: location.name }} />
+        <CurrentWeather
+          data={data?.current}
+          location={location}
+          locationColor={savedLocation?.color}
+        />
+        <Forecast data={data?.forecast} />
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
