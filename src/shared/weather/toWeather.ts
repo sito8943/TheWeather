@@ -31,7 +31,7 @@ const codeMap = {
   86: "Heavy Snow", // Snow Showers: Heavy
 } as const
 
-export type WeatherCode = keyof typeof codeMap
+type WeatherCode = keyof typeof codeMap
 export type Weather = (typeof codeMap)[WeatherCode]
 
 export default function toWeather(input: number): Weather {
