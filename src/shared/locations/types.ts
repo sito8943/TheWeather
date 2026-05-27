@@ -6,3 +6,9 @@ export type Location = {
 } & OpenMeteoLocation
 
 export type LocationId = Location["id"]
+
+export type LocationWeatherCardProps = {
+  isActive: boolean
+  location: Location
+  onPress: () => void
+}

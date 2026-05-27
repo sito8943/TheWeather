@@ -7,13 +7,7 @@ import {
   useOpenMeteoForecast,
 } from "#shared/weather"
 
-import { type Location } from "./types"
-
-type LocationWeatherCardProps = {
-  isActive: boolean
-  location: Location
-  onPress: () => void
-}
+import { type LocationWeatherCardProps } from "./types"
 
 export default function LocationWeatherCard({
   isActive,
