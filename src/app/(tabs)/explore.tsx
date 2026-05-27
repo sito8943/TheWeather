@@ -53,14 +53,11 @@ export default function Explore(): ReactElement {
                   pathname: "/locations/[id]",
                 })
               }}
+              style={styles.gridItem}
             >
-              <Card
-                style={[styles.catalogCard, { borderColor: location.color }]}
-              >
+              <Card style={[styles.catalogCard]}>
                 <View style={styles.row}>
-                  <View>
-                    <Typography>{location.name}</Typography>
-                  </View>
+                  <Typography>{location.name}</Typography>
                 </View>
               </Card>
             </Pressable>
@@ -73,15 +70,18 @@ export default function Explore(): ReactElement {
 
 const styles = StyleSheet.create({
   catalogContainer: {
-    alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: spacing.xs,
-    justifyContent: "center",
+    gap: spacing.sm,
+    justifyContent: "space-between",
+    width: "100%",
   },
   catalogCard: {
     borderRadius: shapes.borderRadius,
-    borderWidth: 2,
+    borderWidth: 1,
+    margin: 0,
+    paddingVertical: spacing.between,
+    width: "100%",
   },
   container: {
     backgroundColor: colors.background,
@@ -98,10 +98,13 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: spacing.between,
   },
+  gridItem: {
+    flexBasis: "48%",
+    flexGrow: 0,
+  },
   row: {
     alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   searchInput: {
     borderColor: colors.muted,

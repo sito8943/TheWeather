@@ -10,7 +10,8 @@ import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 export default function LocationDetails(): ReactElement {
   const { id } = useLocalSearchParams<{ id: string | string[] }>()
   const locationId = Array.isArray(id) ? id[0] : id
-  const location = locationId === undefined ? undefined : findLocationById(locationId)
+  const location =
+    locationId === undefined ? undefined : findLocationById(locationId)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
@@ -29,14 +30,7 @@ export default function LocationDetails(): ReactElement {
       showsVerticalScrollIndicator={false}
     >
       <Stack.Screen options={{ title: location.name }} />
-      <Typography style={[styles.header, { color: location.color }]} variant="title">
-        {location.name}
-      </Typography>
-      <CurrentWeather
-        data={data?.current}
-        location={location}
-        locationColor={location.color}
-      />
+      <CurrentWeather data={data?.current} location={location} />
       <Forecast data={data?.forecast} />
     </ScrollView>
   )
