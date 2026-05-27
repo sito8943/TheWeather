@@ -41,4 +41,4 @@ export default function Typography(props: TypographyProps): ReactElement {
   return <Text style={[styles[variant], style]}>{children}</Text>
 }
 
-const styles = StyleSheet.create(typography)
+const styles = StyleSheet.create({ ...typography })

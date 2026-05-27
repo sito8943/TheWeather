@@ -1,3 +1,5 @@
+import { type StyleProp, type ViewStyle } from "react-native"
+
 import { type Weather } from "./toWeather"
 
 export type OpenMeteoLocation = {
@@ -50,4 +52,11 @@ export type UseOpenMeteoForecastState = {
   data: OpenMeteoData | null
   error: Error | null
   isLoading: boolean
+}
+
+export type CurrentWeatherProps = {
+  cardStyle?: StyleProp<ViewStyle>
+  location?: OpenMeteoLocation | null
+  locationColor?: string
+  data?: OpenMeteoCurrent
 }
