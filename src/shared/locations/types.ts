@@ -1,8 +1,8 @@
 import { type OpenMeteoLocation } from "#shared/weather"
 
-export interface Location extends OpenMeteoLocation {
+export type Location = {
   color: string
   id: string
-}
+} & OpenMeteoLocation
 
 export type LocationId = Location["id"]

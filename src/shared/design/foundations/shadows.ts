@@ -6,7 +6,7 @@ export const main: ViewStyle = {
   shadowColor: shadow,
   ...Platform.select({
     android: {
-      boxShadow: "0px 12px 28px rgba(16, 36, 66, 0.22)",
+      boxShadow: "0px 4px 12px rgba(16, 36, 66, 0.22)",
       elevation: 3,
       shadowColor: "rgba(16, 36, 66, 0.3)",
     },
@@ -16,7 +16,7 @@ export const main: ViewStyle = {
       shadowRadius: 4,
     },
     default: {
-      boxShadow: "0px 12px 28px rgba(16, 36, 66, 0.22)",
+      boxShadow: "0px 4px 12px rgba(16, 36, 66, 0.22)",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 1,
       shadowRadius: 4,
