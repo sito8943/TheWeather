@@ -8,13 +8,19 @@ import { type OpenMeteoCurrent, type OpenMeteoLocation } from "./types"
 
 const CurrentWeather: React.FC<{
   location?: OpenMeteoLocation | null
+  locationColor?: string
   data?: OpenMeteoCurrent
-}> = ({ data, location }) => {
+}> = ({ data, location, locationColor }) => {
   return (
     <Card>
       <View style={styles.current}>
         <Typography variant="title">{data?.temperature ?? "--"} C</Typography>
-        <Typography variant="muted">{location?.name ?? "--"}</Typography>
+        <Typography
+          style={locationColor === undefined ? undefined : [{ color: locationColor }]}
+          variant="muted"
+        >
+          {location?.name ?? "--"}
+        </Typography>
         <Typography variant="label">{data?.condition ?? "--"}</Typography>
       </View>
 

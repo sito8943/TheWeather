@@ -3,12 +3,7 @@ import { StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typography"
 import { colors, spacing } from "#design/foundations"
-
-const favorites = [
-  { id: "barcelona", name: "Barcelona" },
-  { id: "madrid", name: "Madrid" },
-  { id: "valencia", name: "Valencia" },
-]
+import { favoriteLocations } from "#shared/favorites"
 
 export default function Favorites(): ReactElement {
   return (
@@ -17,13 +12,14 @@ export default function Favorites(): ReactElement {
         Favorites
       </Typography>
 
-      {favorites.map((favorite) => (
+      {favoriteLocations.map((favoriteLocation) => (
         <Typography
-          key={favorite.id}
-          href={`/favorites/${favorite.id}`}
+          key={favoriteLocation.id}
+          href={`/favorites/${favoriteLocation.id}`}
+          style={{ color: favoriteLocation.color }}
           variant="link"
         >
-          {favorite.name}
+          {favoriteLocation.name}
         </Typography>
       ))}
     </View>

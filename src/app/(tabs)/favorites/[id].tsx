@@ -4,17 +4,12 @@ import { StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typography"
 import { colors, spacing } from "#design/foundations"
+import { findFavoriteLocationById } from "#shared/favorites"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
-
-const favoriteLocations = {
-  barcelona: { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 },
-  madrid: { name: "Madrid", latitude: 40.416775, longitude: -3.70379 },
-  valencia: { name: "Valencia", latitude: 39.46975, longitude: -0.37739 },
-} as const
 
 export default function FavoriteDetails(): ReactElement {
   const { id } = useLocalSearchParams<{ id: string }>()
-  const location = favoriteLocations[id as keyof typeof favoriteLocations]
+  const location = findFavoriteLocationById(id)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
@@ -30,7 +25,14 @@ export default function FavoriteDetails(): ReactElement {
     <View style={styles.container}>
       <Stack.Screen options={{ title: location.name }} />
 
-      <CurrentWeather location={location} data={data?.current} />
+      <Typography style={[styles.header, { color: location.color }]} variant="title">
+        {location.name}
+      </Typography>
+      <CurrentWeather
+        data={data?.current}
+        location={location}
+        locationColor={location.color}
+      />
       <Forecast data={data?.forecast} />
     </View>
   )
@@ -43,5 +45,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: spacing.between,
+  },
+  header: {
+    marginBottom: spacing.between,
   },
 })
