@@ -15,11 +15,11 @@ export default function Layout(): ReactElement {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="explore"
         options={{
-          title: "Favorites",
+          title: "Explore",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="star" color={color} />
+            <FontAwesome size={size} name="search" color={color} />
           ),
         }}
       />

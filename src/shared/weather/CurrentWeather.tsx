@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, type StyleProp, type ViewStyle } from "react-native"
 
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
@@ -6,13 +6,21 @@ import { spacing } from "#design/foundations"
 
 import { type OpenMeteoCurrent, type OpenMeteoLocation } from "./types"
 
-const CurrentWeather: React.FC<{
+export type CurrentWeatherProps = {
+  cardStyle?: StyleProp<ViewStyle>
   location?: OpenMeteoLocation | null
   locationColor?: string
   data?: OpenMeteoCurrent
-}> = ({ data, location, locationColor }) => {
+}
+
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({
+  cardStyle,
+  data,
+  location,
+  locationColor,
+}) => {
   return (
-    <Card>
+    <Card style={cardStyle}>
       <View style={styles.current}>
         <Typography variant="title">{data?.temperature ?? "--"} C</Typography>
         <Typography

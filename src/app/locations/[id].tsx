@@ -1,30 +1,34 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement } from "react"
-import { StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 
 import Typography from "#design/elements/Typography"
 import { colors, spacing } from "#design/foundations"
-import { findFavoriteLocationById } from "#shared/favorites"
+import { findLocationById } from "#shared/locations"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
-export default function FavoriteDetails(): ReactElement {
-  const { id } = useLocalSearchParams<{ id: string }>()
-  const location = findFavoriteLocationById(id)
+export default function LocationDetails(): ReactElement {
+  const { id } = useLocalSearchParams<{ id: string | string[] }>()
+  const locationId = Array.isArray(id) ? id[0] : id
+  const location = locationId === undefined ? undefined : findLocationById(locationId)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
     return (
-      <View style={styles.container}>
-        <Stack.Screen options={{ title: "Favorite" }} />
-        <Typography variant="title">Favorite not found</Typography>
+      <View style={styles.emptyState}>
+        <Stack.Screen options={{ title: "Location" }} />
+        <Typography variant="title">Location not found</Typography>
       </View>
     )
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.content}
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
       <Stack.Screen options={{ title: location.name }} />
-
       <Typography style={[styles.header, { color: location.color }]} variant="title">
         {location.name}
       </Typography>
@@ -34,12 +38,21 @@ export default function FavoriteDetails(): ReactElement {
         locationColor={location.color}
       />
       <Forecast data={data?.forecast} />
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.background,
+    flex: 1,
+  },
+  content: {
+    alignItems: "center",
+    paddingHorizontal: spacing.between,
+    paddingVertical: spacing.between,
+  },
+  emptyState: {
     alignItems: "center",
     backgroundColor: colors.background,
     flex: 1,

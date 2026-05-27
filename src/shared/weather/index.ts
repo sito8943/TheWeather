@@ -11,3 +11,4 @@ export type {
   OpenMeteoLocation,
   UseOpenMeteoForecastState,
 } from "./types"
+export type { CurrentWeatherProps } from "./CurrentWeather"
