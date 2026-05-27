@@ -6,7 +6,7 @@ export default function Layout(): ReactElement {
   return (
     <>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ title: "The Weather" }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="locations" options={{ headerShown: false }} />
       </Stack>
 

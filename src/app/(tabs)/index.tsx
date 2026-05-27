@@ -9,6 +9,7 @@ import {
   savedLocations,
 } from "#shared/locations"
 import { Forecast, useOpenMeteoForecast } from "#shared/weather"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function Home(): ReactElement {
   const [selectedLocationId, setSelectedLocationId] = useState<
@@ -21,34 +22,38 @@ export default function Home(): ReactElement {
   const { data } = useOpenMeteoForecast(selectedLocation ?? null)
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.content}
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
-      {savedLocations.map((location) => (
-        <LocationWeatherCard
-          isActive={selectedLocationId === location.id}
-          key={location.id}
-          location={location}
-          onPress={() => {
-            setSelectedLocationId(location.id)
-          }}
-        />
-      ))}
+    <SafeAreaView edges={["top"]} style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <Typography variant="title">Your locations</Typography>
 
-      {selectedLocation !== undefined ? (
-        <View style={styles.forecastSection}>
-          <Typography
-            style={[styles.sectionTitle, { color: selectedLocation.color }]}
-            variant="title"
-          >
-            {selectedLocation.name}
-          </Typography>
-          <Forecast data={data?.forecast} />
-        </View>
-      ) : null}
-    </ScrollView>
+        {savedLocations.map((location) => (
+          <LocationWeatherCard
+            isActive={selectedLocationId === location.id}
+            key={location.id}
+            location={location}
+            onPress={() => {
+              setSelectedLocationId(location.id)
+            }}
+          />
+        ))}
+
+        {selectedLocation !== undefined ? (
+          <View style={styles.forecastSection}>
+            <Typography
+              style={[styles.sectionTitle, { color: selectedLocation.color }]}
+              variant="title"
+            >
+              {selectedLocation.name}
+            </Typography>
+            <Forecast data={data?.forecast} />
+          </View>
+        ) : null}
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -62,9 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     flex: 1,
   },
-  forecastSection: {
-    width: "100%",
-  },
+  forecastSection: {},
   sectionTitle: {
     marginBottom: spacing.sm,
   },
