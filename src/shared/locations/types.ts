@@ -8,7 +8,7 @@ export type Location = {
 export type LocationId = Location["id"]
 
 export type LocationWeatherCardProps = {
-  isActive: boolean
+  isActive?: boolean
   location: Location
   onPress: () => void
 }
