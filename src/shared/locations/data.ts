@@ -4,7 +4,7 @@ import {
   type SavedLocation,
 } from "./types"
 
-export const locationCatalog: Location[] = [
+const locationCatalog: Location[] = [
   {
     id: "barcelona",
     latitude: 41.385063,
@@ -49,7 +49,7 @@ const savedColorById: Record<LocationId, string> = {
   valencia: "#0f766e",
 }
 
-export const savedLocationIds: LocationId[] = Object.keys(savedColorById)
+const savedLocationIds: LocationId[] = Object.keys(savedColorById)
 
 export const savedLocations: SavedLocation[] = locationCatalog
   .filter((location) => savedLocationIds.includes(location.id))
