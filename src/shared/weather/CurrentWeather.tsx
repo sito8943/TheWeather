@@ -1,37 +1,39 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
-import Card from "#shared/design/Card"
+import Card from "#design/elements/Card"
+import Typography from "#design/elements/Typography"
+import { spacing } from "#design/foundations"
 
 import { type OpenMeteoCurrent, type OpenMeteoLocation } from "./types"
 
 const CurrentWeather: React.FC<{
-  location: OpenMeteoLocation
+  location?: OpenMeteoLocation | null
   data?: OpenMeteoCurrent
 }> = ({ data, location }) => {
   return (
     <Card>
       <View style={styles.current}>
-        <Text style={styles.temperature}>{data?.temperature ?? "--"} C</Text>
-        <Text style={styles.location}>{location.name}</Text>
-        <Text style={styles.condition}>{data?.condition ?? "--"}</Text>
+        <Typography variant="title">{data?.temperature ?? "--"} C</Typography>
+        <Typography variant="muted">{location?.name ?? "--"}</Typography>
+        <Typography variant="label">{data?.condition ?? "--"}</Typography>
       </View>
 
       <View style={styles.stats}>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>
+          <Typography variant="large">
             {data?.wind.toFixed(0) ?? "--"} km/h
-          </Text>
-          <Text style={styles.statLabel}>Wind</Text>
+          </Typography>
+          <Typography variant="label">Wind</Typography>
         </View>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>
+          <Typography variant="large">
             {data?.humidity.toFixed(0) ?? "--"}%
-          </Text>
-          <Text style={styles.statLabel}>Humidity</Text>
+          </Typography>
+          <Typography variant="label">Humidity</Typography>
         </View>
         <View style={styles.stat}>
-          <Text style={styles.statValue}>{data?.uv.toFixed(0) ?? "--"}</Text>
-          <Text style={styles.statLabel}>UV</Text>
+          <Typography variant="large">{data?.uv.toFixed(0) ?? "--"}</Typography>
+          <Typography variant="label">UV</Typography>
         </View>
       </View>
     </Card>
@@ -41,12 +43,10 @@ const CurrentWeather: React.FC<{
 export default CurrentWeather
 
 const styles = StyleSheet.create({
-  current: { alignItems: "center", marginBottom: 24 },
-  temperature: { fontSize: 28 },
-  location: { fontSize: 12, color: "#888" },
-  condition: { fontWeight: "bold" },
+  current: {
+    alignItems: "center",
+    marginBottom: spacing.between,
+  },
   stats: { flexDirection: "row" },
   stat: { flex: 1, alignItems: "center" },
-  statValue: { fontSize: 20, fontWeight: "500" },
-  statLabel: { fontSize: 12, color: "#888", marginTop: 2 },
 })

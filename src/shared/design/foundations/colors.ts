@@ -1,0 +1,5 @@
+export const background = "#ffffff"
+export const body = "#102542"
+export const brand = "#0f6cbd"
+export const muted = "#667085"
+export const shadow = "rgba(16, 36, 66, 0.16)"

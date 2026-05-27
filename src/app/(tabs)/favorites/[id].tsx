@@ -1,7 +1,9 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
+import Typography from "#design/elements/Typography"
+import { colors, spacing } from "#design/foundations"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 const favoriteLocations = {
@@ -18,7 +20,8 @@ export default function FavoriteDetails(): ReactElement {
   if (location === undefined) {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Favorite not found</Text>
+        <Stack.Screen options={{ title: "Favorite" }} />
+        <Typography variant="title">Favorite not found</Typography>
       </View>
     )
   }
@@ -35,13 +38,10 @@ export default function FavoriteDetails(): ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
+    backgroundColor: colors.background,
+    flex: 1,
     justifyContent: "center",
-    backgroundColor: "#fff",
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
+    paddingHorizontal: spacing.between,
   },
 })

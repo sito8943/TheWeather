@@ -1,16 +1,24 @@
 import { type ReactElement } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 
+import Typography from "#design/elements/Typography"
+import { colors, spacing } from "#design/foundations"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
-const location = { name: "Barcelona", latitude: 41.385063, longitude: 2.173404 }
+const location = {
+  name: "Barcelona",
+  latitude: 41.385063,
+  longitude: 2.173404,
+}
 
 export default function Home(): ReactElement {
   const { data } = useOpenMeteoForecast(location)
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>The Weather</Text>
+      <Typography style={styles.header} variant="title">
+        The Weather
+      </Typography>
 
       <CurrentWeather location={location} data={data?.current} />
       <Forecast data={data?.forecast} />
@@ -20,14 +28,13 @@ export default function Home(): ReactElement {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: spacing.between,
   },
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
+    backgroundColor: colors.background,
+    flex: 1,
     justifyContent: "center",
+    paddingHorizontal: spacing.between,
   },
 })

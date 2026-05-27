@@ -1,6 +1,8 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 
-import Card from "#shared/design/Card"
+import Card from "#design/elements/Card"
+import Typography from "#design/elements/Typography"
+import { spacing } from "#design/foundations"
 
 import { type OpenMeteoForecast } from "./types"
 
@@ -12,9 +14,9 @@ const Forecast: React.FC<{
       <ScrollView horizontal style={styles.days}>
         {data?.map(({ day, temperatureMax, temperatureMin, condition }) => (
           <View key={day} style={styles.day}>
-            <Text style={styles.temperatureMax}>{temperatureMax} C</Text>
-            <Text style={styles.temperatureMin}>{temperatureMin} C</Text>
-            <Text style={styles.condition}>{condition}</Text>
+            <Typography variant="large">{temperatureMax} C</Typography>
+            <Typography variant="muted">{temperatureMin} C</Typography>
+            <Typography variant="label">{condition}</Typography>
           </View>
         ))}
       </ScrollView>
@@ -25,9 +27,10 @@ const Forecast: React.FC<{
 export default Forecast
 
 const styles = StyleSheet.create({
-  temperatureMax: { fontSize: 18 },
-  temperatureMin: { fontSize: 14, color: "#888" },
-  condition: { fontWeight: "bold" },
   days: { flexGrow: 0, flexDirection: "row" },
-  day: { flex: 1, alignItems: "center", marginHorizontal: 16 },
+  day: {
+    alignItems: "center",
+    flex: 1,
+    marginHorizontal: spacing.between,
+  },
 })

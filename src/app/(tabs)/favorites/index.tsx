@@ -1,6 +1,8 @@
-import { Link } from "expo-router"
 import { type ReactElement } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
+
+import Typography from "#design/elements/Typography"
+import { colors, spacing } from "#design/foundations"
 
 const favorites = [
   { id: "barcelona", name: "Barcelona" },
@@ -11,16 +13,18 @@ const favorites = [
 export default function Favorites(): ReactElement {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Favorites</Text>
+      <Typography style={styles.header} variant="title">
+        Favorites
+      </Typography>
 
       {favorites.map((favorite) => (
-        <Link
+        <Typography
           key={favorite.id}
           href={`/favorites/${favorite.id}`}
-          style={styles.link}
+          variant="link"
         >
           {favorite.name}
-        </Link>
+        </Typography>
       ))}
     </View>
   )
@@ -28,19 +32,12 @@ export default function Favorites(): ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
+    backgroundColor: colors.background,
+    flex: 1,
     justifyContent: "center",
-    backgroundColor: "#fff",
   },
   header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
-  link: {
-    color: "#1565c0",
-    fontSize: 18,
-    marginVertical: 8,
+    marginBottom: spacing.between,
   },
 })
