@@ -11,13 +11,15 @@ const Forecast: React.FC<{
 }> = ({ data }) => {
   return (
     <Card style={styles.card}>
+      <Typography variant="large">7-day forecast</Typography>
       <ScrollView style={styles.days}>
         {data?.map(({ day, temperatureMax, temperatureMin, condition }) => (
           <View key={day} style={styles.day}>
             <Typography variant="label">{day}</Typography>
             <View style={styles.info}>
               <View style={styles.temperatures}>
-                <Typography variant="muted">{temperatureMax} C</Typography>
+                <Typography variant="muted">{temperatureMax} C --</Typography>
+
                 <Typography variant="muted">{temperatureMin} C</Typography>
               </View>
               <Typography variant="label">{condition}</Typography>
