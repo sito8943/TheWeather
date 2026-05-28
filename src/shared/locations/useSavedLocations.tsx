@@ -1,4 +1,11 @@
-import { useCallback, useMemo } from "react"
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  type ReactElement,
+  type ReactNode,
+} from "react"
 
 import { useStoredState } from "#shared/storage"
 
@@ -35,7 +42,15 @@ export type UseSavedLocationsResult = {
   toggle: (location: Location, color?: string) => void
 }
 
-export function useSavedLocations(): UseSavedLocationsResult {
+const Context = createContext<UseSavedLocationsResult | undefined>(undefined)
+
+type SavedLocationsProviderProps = {
+  children: ReactNode
+}
+
+export function SavedLocationsProvider({
+  children,
+}: SavedLocationsProviderProps): ReactElement {
   const { data, error, isLoading, setData } = useStoredState<SavedLocation[]>({
     errorMessage: "Unable to persist saved locations.",
     initialValue: DEFAULT_SAVED_LOCATIONS,
@@ -82,7 +97,7 @@ export function useSavedLocations(): UseSavedLocationsResult {
     [setData],
   )
 
-  return useMemo(
+  const value = useMemo<UseSavedLocationsResult>(
     () => ({
       add,
       data,
@@ -95,4 +110,12 @@ export function useSavedLocations(): UseSavedLocationsResult {
     }),
     [add, data, error, findById, isLoading, isSaved, remove, toggle],
   )
+
+  return <Context.Provider value={value}>{children}</Context.Provider>
+}
+
+export function useSavedLocations(): UseSavedLocationsResult {
+  const context = useContext(Context)
+  if (!context) throw new Error("Missing SavedLocationsProvider.")
+  return context
 }
