@@ -1,23 +1,30 @@
 import { type ReactElement } from "react"
-import { StyleSheet, View } from "react-native"
+import { View } from "react-native"
 
-import { colors, shadows, shapes, spacing } from "#design/foundations"
+import {
+  createShadows,
+  shapes,
+  spacing,
+  type ThemeColors,
+} from "#design/foundations"
+import { useThemedStyles } from "#shared/settings"
 
 import { type CardProps } from "./types"
 
 export default function Card({ children, style }: CardProps): ReactElement {
+  const styles = useThemedStyles(createStyles)
   return <View style={[styles.container, style]}>{children}</View>
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => ({
   container: {
-    alignItems: "center",
+    alignItems: "center" as const,
     backgroundColor: colors.background,
     borderRadius: shapes.borderRadius,
-    justifyContent: "center",
+    justifyContent: "center" as const,
     margin: spacing.between,
     padding: spacing.inside,
-    width: "100%",
-    ...shadows.main,
+    width: "100%" as const,
+    ...createShadows(colors).main,
   },
 })

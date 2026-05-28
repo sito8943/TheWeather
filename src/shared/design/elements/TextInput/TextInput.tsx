@@ -1,25 +1,29 @@
 import { type ReactElement } from "react"
-import { TextInput as RNTextInput, StyleSheet } from "react-native"
+import { TextInput as RNTextInput } from "react-native"
 
-import { colors, shapes, spacing } from "#design/foundations"
+import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import { useThemeColors, useThemedStyles } from "#shared/settings"
 
 import { type TextInputProps } from "./types"
 
 export default function TextInput({
   style,
-  placeholderTextColor = colors.muted,
+  placeholderTextColor,
   ...rest
 }: TextInputProps): ReactElement {
+  const styles = useThemedStyles(createStyles)
+  const colors = useThemeColors()
+
   return (
     <RNTextInput
-      placeholderTextColor={placeholderTextColor}
+      placeholderTextColor={placeholderTextColor ?? colors.muted}
       style={[styles.input, style]}
       {...rest}
     />
   )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => ({
   input: {
     borderColor: colors.muted,
     borderRadius: shapes.borderRadius,
@@ -27,6 +31,6 @@ const styles = StyleSheet.create({
     color: colors.body,
     paddingHorizontal: spacing.between,
     paddingVertical: spacing.sm,
-    width: "100%",
+    width: "100%" as const,
   },
 })

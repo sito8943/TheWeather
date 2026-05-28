@@ -1,16 +1,18 @@
 import { router } from "expo-router"
 import { type ReactElement, useState } from "react"
-import { Pressable, ScrollView, StyleSheet, View } from "react-native"
+import { Pressable, ScrollView, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
-import { colors, shapes, spacing } from "#design/foundations"
+import { shapes, spacing, type ThemeColors } from "#design/foundations"
 import { findSavedLocationById, searchLocations } from "#shared/locations"
+import { useThemedStyles } from "#shared/settings"
 
 export default function Explore(): ReactElement {
+  const styles = useThemedStyles(createStyles)
   const [query, setQuery] = useState("")
   const results = searchLocations(query)
 
@@ -74,27 +76,27 @@ export default function Explore(): ReactElement {
   )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => ({
   catalogContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: "row" as const,
+    flexWrap: "wrap" as const,
     gap: spacing.sm,
-    justifyContent: "space-between",
-    width: "100%",
+    justifyContent: "space-between" as const,
+    width: "100%" as const,
   },
   catalogCard: {
     borderRadius: shapes.borderRadius,
     borderWidth: 1,
     margin: 0,
     paddingVertical: spacing.between,
-    width: "100%",
+    width: "100%" as const,
   },
   container: {
     backgroundColor: colors.background,
     flex: 1,
   },
   content: {
-    alignItems: "center",
+    alignItems: "center" as const,
     paddingHorizontal: spacing.inside,
     paddingVertical: spacing.between,
   },
@@ -105,12 +107,12 @@ const styles = StyleSheet.create({
     marginBottom: spacing.between,
   },
   gridItem: {
-    flexBasis: "48%",
+    flexBasis: "48%" as const,
     flexGrow: 0,
   },
   row: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "center" as const,
+    justifyContent: "center" as const,
   },
   searchInput: {
     marginBottom: spacing.between,

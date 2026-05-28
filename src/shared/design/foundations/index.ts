@@ -1,5 +1,5 @@
-export * as colors from "./colors"
-export * as shadows from "./shadows"
+export * from "./colors"
+export * from "./shadows"
+export * from "./typography"
 export * as shapes from "./shapes"
 export * as spacing from "./spacing"
-export * as typography from "./typography"

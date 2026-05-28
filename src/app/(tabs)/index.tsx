@@ -1,14 +1,17 @@
 import { router } from "expo-router"
 import { type ReactElement } from "react"
-import { ScrollView, StyleSheet } from "react-native"
+import { ScrollView } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Typography from "#design/elements/Typography"
-import { colors, spacing } from "#design/foundations"
+import { spacing, type ThemeColors } from "#design/foundations"
 import { LocationWeatherCard, savedLocations } from "#shared/locations"
+import { useThemedStyles } from "#shared/settings"
 
 export default function Home(): ReactElement {
+  const styles = useThemedStyles(createStyles)
+
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
       <ScrollView
@@ -30,9 +33,9 @@ export default function Home(): ReactElement {
   )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => ({
   content: {
-    alignItems: "center",
+    alignItems: "center" as const,
     paddingHorizontal: spacing.between,
     paddingVertical: spacing.between,
   },

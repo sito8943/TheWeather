@@ -1,15 +1,17 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement } from "react"
-import { ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Typography from "#design/elements/Typography"
-import { colors, spacing } from "#design/foundations"
+import { spacing, type ThemeColors } from "#design/foundations"
 import { findLocationById, findSavedLocationById } from "#shared/locations"
+import { useThemedStyles } from "#shared/settings"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 export default function LocationDetails(): ReactElement {
+  const styles = useThemedStyles(createStyles)
   const { id } = useLocalSearchParams<{ id: string | string[] }>()
   const locationId = Array.isArray(id) ? id[0] : id
   const location =
@@ -45,21 +47,21 @@ export default function LocationDetails(): ReactElement {
   )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => ({
   container: {
     backgroundColor: colors.background,
     flex: 1,
   },
   content: {
-    alignItems: "center",
+    alignItems: "center" as const,
     paddingHorizontal: spacing.between,
     paddingVertical: spacing.between,
   },
   emptyState: {
-    alignItems: "center",
+    alignItems: "center" as const,
     backgroundColor: colors.background,
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "center" as const,
     paddingHorizontal: spacing.between,
   },
 })

@@ -21,9 +21,3 @@ export const darkColors: ThemeColors = {
   muted: "#94a3b8",
   shadow: "rgba(0, 0, 0, 0.6)",
 }
-
-export const background = lightColors.background
-export const body = lightColors.body
-export const brand = lightColors.brand
-export const muted = lightColors.muted
-export const shadow = lightColors.shadow
