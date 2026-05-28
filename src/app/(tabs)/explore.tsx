@@ -86,6 +86,7 @@ const createStyles = (colors: ThemeColors) => ({
     width: "100%" as const,
   },
   catalogCard: {
+    borderColor: colors.border,
     borderRadius: shapes.borderRadius,
     borderWidth: 1,
     margin: 0,

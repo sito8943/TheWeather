@@ -2,15 +2,30 @@ import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { Tabs } from "expo-router"
 import { type ReactElement } from "react"
 
+import { useThemeColors } from "#shared/settings"
+
 export default function Layout(): ReactElement {
+  const colors = useThemeColors()
+
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        sceneStyle: { backgroundColor: colors.background },
+        tabBarActiveTintColor: colors.brand,
+        tabBarInactiveTintColor: colors.muted,
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="home" color={color} />
+            <FontAwesome color={color} name="home" size={size} />
           ),
         }}
       />
@@ -19,7 +34,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Explore",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="search" color={color} />
+            <FontAwesome color={color} name="search" size={size} />
           ),
         }}
       />
@@ -28,7 +43,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome size={size} name="gear" color={color} />
+            <FontAwesome color={color} name="gear" size={size} />
           ),
         }}
       />

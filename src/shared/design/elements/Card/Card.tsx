@@ -19,7 +19,7 @@ export default function Card({ children, style }: CardProps): ReactElement {
 const createStyles = (colors: ThemeColors) => ({
   container: {
     alignItems: "center" as const,
-    backgroundColor: colors.background,
+    backgroundColor: colors.surface,
     borderRadius: shapes.borderRadius,
     justifyContent: "center" as const,
     margin: spacing.between,

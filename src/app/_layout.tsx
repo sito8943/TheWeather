@@ -3,19 +3,39 @@ import { StatusBar } from "expo-status-bar"
 import { type ReactElement } from "react"
 
 import { SavedLocationsProvider } from "#shared/locations"
-import { SettingsProvider } from "#shared/settings"
+import {
+  RESOLVED_THEME,
+  SettingsProvider,
+  useTheme,
+} from "#shared/settings"
 
 export default function Layout(): ReactElement {
   return (
     <SettingsProvider>
       <SavedLocationsProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="locations" options={{ headerShown: false }} />
-        </Stack>
-
-        <StatusBar style="auto" />
+        <ThemedRoot />
       </SavedLocationsProvider>
     </SettingsProvider>
+  )
+}
+
+function ThemedRoot(): ReactElement {
+  const { colors, resolvedTheme } = useTheme()
+
+  return (
+    <>
+      <Stack
+        screenOptions={{
+          contentStyle: { backgroundColor: colors.background },
+        }}
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="locations" options={{ headerShown: false }} />
+      </Stack>
+
+      <StatusBar
+        style={resolvedTheme === RESOLVED_THEME.DARK ? "light" : "dark"}
+      />
+    </>
   )
 }
