@@ -63,7 +63,13 @@ export default function Explore(): ReactElement {
                   ]}
                 >
                   <View style={styles.row}>
-                    <Typography style={{ color: savedColor }}>
+                    <Typography
+                      style={
+                        savedColor === undefined
+                          ? undefined
+                          : { color: savedColor }
+                      }
+                    >
                       {location.name}
                     </Typography>
                   </View>

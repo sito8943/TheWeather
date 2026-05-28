@@ -1,7 +1,7 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { Tabs } from "expo-router"
 import { type ReactElement } from "react"
 
+import Icon from "#design/elements/Icon"
 import { useThemeColors } from "#shared/settings"
 
 export default function Layout(): ReactElement {
@@ -25,7 +25,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome color={color} name="home" size={size} />
+            <Icon color={color} icon="home" size={size} />
           ),
         }}
       />
@@ -34,7 +34,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Explore",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome color={color} name="search" size={size} />
+            <Icon color={color} icon="search" size={size} />
           ),
         }}
       />
@@ -43,7 +43,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome color={color} name="gear" size={size} />
+            <Icon color={color} icon="settings" size={size} />
           ),
         }}
       />
