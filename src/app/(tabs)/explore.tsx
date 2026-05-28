@@ -8,11 +8,12 @@ import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
-import { findSavedLocationById, searchLocations } from "#shared/locations"
+import { searchLocations, useSavedLocations } from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
 export default function Explore(): ReactElement {
   const styles = useThemedStyles(createStyles)
+  const { findById } = useSavedLocations()
   const [query, setQuery] = useState("")
   const results = searchLocations(query)
 
@@ -41,7 +42,7 @@ export default function Explore(): ReactElement {
 
         <View style={styles.catalogContainer}>
           {results.map((location) => {
-            const savedColor = findSavedLocationById(location.id)?.color
+            const savedColor = findById(location.id)?.color
             return (
               <Pressable
                 key={location.id}

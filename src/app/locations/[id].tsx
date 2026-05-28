@@ -1,23 +1,26 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement } from "react"
-import { ScrollView, View } from "react-native"
+import { Pressable, ScrollView, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
+import Icon from "#design/elements/Icon"
 import Typography from "#design/elements/Typography"
 import { spacing, type ThemeColors } from "#design/foundations"
-import { findLocationById, findSavedLocationById } from "#shared/locations"
-import { useThemedStyles } from "#shared/settings"
+import { findLocationById, useSavedLocations } from "#shared/locations"
+import { useThemeColors, useThemedStyles } from "#shared/settings"
 import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
 
 export default function LocationDetails(): ReactElement {
   const styles = useThemedStyles(createStyles)
+  const colors = useThemeColors()
+  const { findById, isSaved, toggle } = useSavedLocations()
   const { id } = useLocalSearchParams<{ id: string | string[] }>()
   const locationId = Array.isArray(id) ? id[0] : id
   const location =
     locationId === undefined ? undefined : findLocationById(locationId)
   const savedLocation =
-    locationId === undefined ? undefined : findSavedLocationById(locationId)
+    locationId === undefined ? undefined : findById(locationId)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
@@ -29,13 +32,34 @@ export default function LocationDetails(): ReactElement {
     )
   }
 
+  const saved = isSaved(location.id)
+
   return (
     <SafeAreaView edges={["top", "bottom"]} style={styles.container}>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <Pressable
+              hitSlop={8}
+              onPress={() => {
+                toggle(location)
+              }}
+              style={styles.headerAction}
+            >
+              <Icon
+                color={saved ? colors.negative : colors.body}
+                icon={saved ? "heart" : "heartOutline"}
+                size={22}
+              />
+            </Pressable>
+          ),
+          title: location.name,
+        }}
+      />
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        <Stack.Screen options={{ title: location.name }} />
         <CurrentWeather
           data={data?.current}
           location={location}
@@ -63,5 +87,8 @@ const createStyles = (colors: ThemeColors) => ({
     flex: 1,
     justifyContent: "center" as const,
     paddingHorizontal: spacing.between,
+  },
+  headerAction: {
+    paddingHorizontal: spacing.sm,
   },
 })
