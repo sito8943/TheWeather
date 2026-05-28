@@ -1,3 +1,4 @@
+import { type ReactElement } from "react"
 import { StyleSheet, View } from "react-native"
 
 import Card from "#design/elements/Card"
@@ -6,12 +7,12 @@ import { spacing } from "#design/foundations"
 
 import { type CurrentWeatherProps } from "./types"
 
-const CurrentWeather: React.FC<CurrentWeatherProps> = ({
+export default function CurrentWeather({
   cardStyle,
   data,
   location,
   locationColor,
-}) => {
+}: CurrentWeatherProps): ReactElement {
   return (
     <Card style={[styles.card, cardStyle]}>
       <View style={styles.current}>
@@ -46,8 +47,6 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = ({
     </Card>
   )
 }
-
-export default CurrentWeather
 
 const styles = StyleSheet.create({
   card: {

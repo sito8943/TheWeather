@@ -1,11 +1,11 @@
 export {
   DEFAULT_SAVED_LOCATIONS,
   findLocationById,
-  searchLocations,
-} from "./data"
-export { default as LocationWeatherCard } from "./LocationWeatherCard"
+} from "./locationCatalog"
+export { searchLocations } from "./searchLocations"
+export { default as SavedLocationCard } from "./SavedLocationCard"
 export {
   SavedLocationsProvider,
   useSavedLocations,
-} from "./useSavedLocations"
-export type { UseSavedLocationsResult } from "./useSavedLocations"
+} from "./savedLocations"
+export type { UseSavedLocationsResult } from "./savedLocations"

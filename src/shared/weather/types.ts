@@ -60,3 +60,7 @@ export type CurrentWeatherProps = {
   locationColor?: string
   data?: OpenMeteoCurrent
 }
+
+export type ForecastProps = {
+  data?: OpenMeteoForecast[]
+}

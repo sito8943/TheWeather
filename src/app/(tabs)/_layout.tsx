@@ -30,9 +30,9 @@ export default function Layout(): ReactElement {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="search"
         options={{
-          title: "Explore",
+          title: "Search",
           tabBarIcon: ({ color, size }) => (
             <Icon color={color} icon="search" size={size} />
           ),

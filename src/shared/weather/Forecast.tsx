@@ -1,14 +1,13 @@
+import { type ReactElement } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { spacing } from "#design/foundations"
 
-import { type OpenMeteoForecast } from "./types"
+import { type ForecastProps } from "./types"
 
-const Forecast: React.FC<{
-  data?: OpenMeteoForecast[]
-}> = ({ data }) => {
+export default function Forecast({ data }: ForecastProps): ReactElement {
   return (
     <Card style={styles.card}>
       <Typography variant="large">7-day forecast</Typography>
@@ -30,8 +29,6 @@ const Forecast: React.FC<{
     </Card>
   )
 }
-
-export default Forecast
 
 const styles = StyleSheet.create({
   card: {

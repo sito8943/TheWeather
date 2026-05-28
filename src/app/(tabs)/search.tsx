@@ -11,7 +11,7 @@ import { shapes, spacing, type ThemeColors } from "#design/foundations"
 import { searchLocations, useSavedLocations } from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
-export default function Explore(): ReactElement {
+export default function Search(): ReactElement {
   const styles = useThemedStyles(createStyles)
   const { findById } = useSavedLocations()
   const [query, setQuery] = useState("")
@@ -24,7 +24,7 @@ export default function Explore(): ReactElement {
         showsVerticalScrollIndicator={false}
       >
         <Typography style={styles.header} variant="title">
-          Explore
+          Search
         </Typography>
 
         <TextInput

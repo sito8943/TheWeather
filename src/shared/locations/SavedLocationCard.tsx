@@ -3,12 +3,12 @@ import { Pressable, StyleSheet } from "react-native"
 
 import { CurrentWeather, useOpenMeteoForecast } from "#shared/weather"
 
-import { type LocationWeatherCardProps } from "./types"
+import { type SavedLocationCardProps } from "./types"
 
-export default function LocationWeatherCard({
+export default function SavedLocationCard({
   location,
   onPress,
-}: LocationWeatherCardProps): ReactElement {
+}: SavedLocationCardProps): ReactElement {
   const { data } = useOpenMeteoForecast(location)
 
   return (

@@ -9,11 +9,12 @@ import {
 
 import { useStoredState } from "#shared/storage"
 
-import { DEFAULT_SAVED_LOCATIONS } from "./data"
+import { DEFAULT_SAVED_LOCATIONS } from "./locationCatalog"
 import { type Location, type SavedLocation } from "./types"
 
 const STORAGE_KEY = "the-weather:saved-locations"
 
+// This is temporal until we implement color selection for saved locations.
 const DEFAULT_COLOR = "#0f6cbd"
 
 const parseSavedLocations = (value: unknown): SavedLocation[] => {

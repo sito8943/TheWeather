@@ -1,6 +1,6 @@
 import { type Location, type LocationId, type SavedLocation } from "./types"
 
-const locationCatalog: Location[] = [
+export const locationCatalog: Location[] = [
   {
     id: "barcelona",
     latitude: 41.385063,
@@ -51,16 +51,4 @@ export const DEFAULT_SAVED_LOCATIONS: SavedLocation[] = locationCatalog
 
 export function findLocationById(id: string): Location | undefined {
   return locationCatalog.find((location) => location.id === id)
-}
-
-export function searchLocations(query: string): Location[] {
-  const normalizedQuery = query.trim().toLowerCase()
-
-  if (normalizedQuery.length === 0) {
-    return locationCatalog
-  }
-
-  return locationCatalog.filter((location) =>
-    location.name.toLowerCase().includes(normalizedQuery),
-  )
 }

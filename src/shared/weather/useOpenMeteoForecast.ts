@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 
 import {
+  getOpenMeteoForecastUrl,
+  mapOpenMeteoCurrent,
+  mapOpenMeteoForecast,
+} from "./openMeteo"
+import {
   type ForecastLocation,
   type OpenMeteoForecastResponse,
   type UseOpenMeteoForecastState,
 } from "./types"
 
-import {
-  getOpenMeteoForecastUrl,
-  mapOpenMeteoCurrent,
-  mapOpenMeteoForecast,
-} from "./utils"
 
 export default function useOpenMeteoForecast(
   location: ForecastLocation | null,

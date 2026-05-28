@@ -10,7 +10,7 @@ export type SavedLocation = Location & {
 
 export type LocationId = Location["id"]
 
-export type LocationWeatherCardProps = {
+export type SavedLocationCardProps = {
   location: SavedLocation
   onPress: () => void
 }

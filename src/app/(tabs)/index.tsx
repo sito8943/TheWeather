@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 
 import Typography from "#design/elements/Typography"
 import { spacing, type ThemeColors } from "#design/foundations"
-import { LocationWeatherCard, useSavedLocations } from "#shared/locations"
+import { SavedLocationCard, useSavedLocations } from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
 export default function Home(): ReactElement {
@@ -21,7 +21,7 @@ export default function Home(): ReactElement {
       >
         <Typography variant="title">Your locations</Typography>
         {savedLocations.map((location) => (
-          <LocationWeatherCard
+          <SavedLocationCard
             key={location.id}
             location={location}
             onPress={() => {
