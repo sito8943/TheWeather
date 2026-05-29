@@ -19,6 +19,7 @@ export default function Home(): ReactElement {
     currentLocation,
     error: currentLocationError,
     isLoading: isLoadingCurrentLocation,
+    isOnline,
     isSaved: isCurrentLocationSaved,
   } = useAddCurrentLocation()
 
@@ -29,7 +30,7 @@ export default function Home(): ReactElement {
         showsVerticalScrollIndicator={false}
       >
         <Typography variant="title">Your locations</Typography>
-        {!isCurrentLocationSaved && currentLocationError === null ? (
+        {isOnline && !isCurrentLocationSaved && currentLocationError === null ? (
           <Pressable
             disabled={isLoadingCurrentLocation || currentLocation === null}
             onPress={addCurrentLocation}

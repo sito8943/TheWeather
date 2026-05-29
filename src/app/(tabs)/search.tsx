@@ -20,6 +20,7 @@ export default function Search(): ReactElement {
     currentLocation,
     error: currentLocationError,
     isLoading: isLoadingCurrentLocation,
+    isOnline,
     isSaved: isCurrentLocationSaved,
   } = useAddCurrentLocation()
   const [query, setQuery] = useState("")
@@ -37,7 +38,9 @@ export default function Search(): ReactElement {
 
         {!isCurrentLocationSaved && currentLocationError === null ? (
           <Pressable
-            disabled={isLoadingCurrentLocation || currentLocation === null}
+            disabled={
+              isLoadingCurrentLocation || currentLocation === null || !isOnline
+            }
             onPress={addCurrentLocation}
             style={({ pressed }) => [
               styles.currentLocationButton,
@@ -45,9 +48,11 @@ export default function Search(): ReactElement {
             ]}
           >
             <Typography variant="label">
-              {isLoadingCurrentLocation
-                ? "Locating…"
-                : `Use my location${currentLocation === null ? "" : `: ${currentLocation.name}`}`}
+              {!isOnline
+                ? "Offline"
+                : isLoadingCurrentLocation
+                  ? "Locating…"
+                  : `Use my location${currentLocation === null ? "" : `: ${currentLocation.name}`}`}
             </Typography>
           </Pressable>
         ) : null}

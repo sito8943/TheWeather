@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import { useIsOnline } from "#shared/network"
+
 import {
   getOpenMeteoForecastUrl,
   mapOpenMeteoCurrent,
@@ -17,6 +19,7 @@ export default function useOpenMeteoForecast(
 ): UseOpenMeteoForecastState {
   const latitude = location?.latitude
   const longitude = location?.longitude
+  const isOnline = useIsOnline()
   const [state, setState] = useState<UseOpenMeteoForecastState>({
     data: null,
     error: null,
@@ -30,6 +33,16 @@ export default function useOpenMeteoForecast(
         error: null,
         isLoading: false,
       })
+
+      return
+    }
+
+    if (!isOnline) {
+      setState((currentState) => ({
+        ...currentState,
+        error: new Error("You are offline."),
+        isLoading: false,
+      }))
 
       return
     }
@@ -70,7 +83,7 @@ export default function useOpenMeteoForecast(
     }
 
     void fetchForecast()
-  }, [latitude, longitude])
+  }, [latitude, longitude, isOnline])
 
   return state
 }

@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar"
 import { type ReactElement } from "react"
 
 import { SavedLocationsProvider } from "#shared/locations"
+import { OfflineBanner } from "#shared/network"
 import {
   RESOLVED_THEME,
   SettingsProvider,
@@ -24,6 +25,8 @@ function ThemedRoot(): ReactElement {
 
   return (
     <>
+      <OfflineBanner />
+
       <Stack
         screenOptions={{
           contentStyle: { backgroundColor: colors.background },
