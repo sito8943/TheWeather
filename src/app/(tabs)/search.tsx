@@ -8,12 +8,20 @@ import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import { useAddCurrentLocation } from "#shared/location"
 import { searchLocations, useSavedLocations } from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
 export default function Search(): ReactElement {
   const styles = useThemedStyles(createStyles)
   const { findById } = useSavedLocations()
+  const {
+    add: addCurrentLocation,
+    currentLocation,
+    error: currentLocationError,
+    isLoading: isLoadingCurrentLocation,
+    isSaved: isCurrentLocationSaved,
+  } = useAddCurrentLocation()
   const [query, setQuery] = useState("")
   const results = searchLocations(query)
 
@@ -26,6 +34,23 @@ export default function Search(): ReactElement {
         <Typography style={styles.header} variant="title">
           Search
         </Typography>
+
+        {!isCurrentLocationSaved && currentLocationError === null ? (
+          <Pressable
+            disabled={isLoadingCurrentLocation || currentLocation === null}
+            onPress={addCurrentLocation}
+            style={({ pressed }) => [
+              styles.currentLocationButton,
+              pressed && styles.currentLocationButtonPressed,
+            ]}
+          >
+            <Typography variant="label">
+              {isLoadingCurrentLocation
+                ? "Locating…"
+                : `Use my location${currentLocation === null ? "" : `: ${currentLocation.name}`}`}
+            </Typography>
+          </Pressable>
+        ) : null}
 
         <TextInput
           onChangeText={setQuery}
@@ -107,6 +132,20 @@ const createStyles = (colors: ThemeColors) => ({
     alignItems: "center" as const,
     paddingHorizontal: spacing.inside,
     paddingVertical: spacing.between,
+  },
+  currentLocationButton: {
+    alignItems: "center" as const,
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: shapes.borderRadius,
+    borderWidth: 1,
+    marginBottom: spacing.between,
+    paddingHorizontal: spacing.inside,
+    paddingVertical: spacing.between,
+    width: "100%" as const,
+  },
+  currentLocationButtonPressed: {
+    opacity: 0.7,
   },
   emptyState: {
     marginBottom: spacing.between,

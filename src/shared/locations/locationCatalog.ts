@@ -40,7 +40,7 @@ export const locationCatalog: Location[] = [
 ]
 
 const seedColorById: Record<LocationId, string> = {
-  barcelona: "#c2410c",
+  sevilla: "#c2410c",
   madrid: "#1d4ed8",
   valencia: "#0f766e",
 }
@@ -51,4 +51,12 @@ export const DEFAULT_SAVED_LOCATIONS: SavedLocation[] = locationCatalog
 
 export function findLocationById(id: string): Location | undefined {
   return locationCatalog.find((location) => location.id === id)
+}
+
+export function findLocationByName(name: string): Location | undefined {
+  const normalized = name.trim().toLowerCase()
+  if (normalized.length === 0) return undefined
+  return locationCatalog.find(
+    (location) => location.name.toLowerCase() === normalized,
+  )
 }

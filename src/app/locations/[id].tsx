@@ -17,10 +17,12 @@ export default function LocationDetails(): ReactElement {
   const { findById, isSaved, toggle } = useSavedLocations()
   const { id } = useLocalSearchParams<{ id: string | string[] }>()
   const locationId = Array.isArray(id) ? id[0] : id
-  const location =
-    locationId === undefined ? undefined : findLocationById(locationId)
   const savedLocation =
     locationId === undefined ? undefined : findById(locationId)
+  const location =
+    locationId === undefined
+      ? undefined
+      : (findLocationById(locationId) ?? savedLocation)
   const { data } = useOpenMeteoForecast(location ?? null)
 
   if (location === undefined) {
