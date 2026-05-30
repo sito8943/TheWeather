@@ -9,7 +9,11 @@ import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
 import { useAddCurrentLocation } from "#shared/location"
-import { searchLocations, useSavedLocations } from "#shared/locations"
+import {
+  ColorPickerModal,
+  searchLocations,
+  useSavedLocations,
+} from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
 export default function Search(): ReactElement {
@@ -24,6 +28,7 @@ export default function Search(): ReactElement {
     isSaved: isCurrentLocationSaved,
   } = useAddCurrentLocation()
   const [query, setQuery] = useState("")
+  const [isPickingColor, setIsPickingColor] = useState(false)
   const results = searchLocations(query)
 
   return (
@@ -41,7 +46,9 @@ export default function Search(): ReactElement {
             disabled={
               isLoadingCurrentLocation || currentLocation === null || !isOnline
             }
-            onPress={addCurrentLocation}
+            onPress={() => {
+              setIsPickingColor(true)
+            }}
             style={({ pressed }) => [
               styles.currentLocationButton,
               pressed && styles.currentLocationButtonPressed,
@@ -109,6 +116,20 @@ export default function Search(): ReactElement {
           })}
         </View>
       </ScrollView>
+
+      {currentLocation === null ? null : (
+        <ColorPickerModal
+          locationName={currentLocation.name}
+          onCancel={() => {
+            setIsPickingColor(false)
+          }}
+          onConfirm={(color) => {
+            addCurrentLocation(color)
+            setIsPickingColor(false)
+          }}
+          visible={isPickingColor}
+        />
+      )}
     </SafeAreaView>
   )
 }

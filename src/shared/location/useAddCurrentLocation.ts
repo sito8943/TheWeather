@@ -7,7 +7,7 @@ import { useIsOnline } from "#shared/network"
 import useCurrentLocation from "./useCurrentLocation"
 
 export type UseAddCurrentLocationResult = {
-  add: () => void
+  add: (color: string) => void
   currentLocation: Location | null
   error: Error | null
   isLoading: boolean
@@ -20,14 +20,17 @@ export default function useAddCurrentLocation(): UseAddCurrentLocationResult {
   const { add, isSaved } = useSavedLocations()
   const isOnline = useIsOnline()
 
-  const handleAdd = useCallback(() => {
-    if (data === null || !isOnline) return
-    add(data)
-    router.push({
-      params: { id: data.id },
-      pathname: "/locations/[id]",
-    })
-  }, [add, data, isOnline])
+  const handleAdd = useCallback(
+    (color: string) => {
+      if (data === null || !isOnline) return
+      add(data, color)
+      router.push({
+        params: { id: data.id },
+        pathname: "/locations/[id]",
+      })
+    },
+    [add, data, isOnline],
+  )
 
   return {
     add: handleAdd,

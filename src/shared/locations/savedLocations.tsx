@@ -9,13 +9,11 @@ import {
 
 import { useStoredState } from "#shared/storage"
 
+import { DEFAULT_LOCATION_COLOR } from "./color"
 import { DEFAULT_SAVED_LOCATIONS } from "./locationCatalog"
 import { type Location, type SavedLocation } from "./types"
 
 const STORAGE_KEY = "the-weather:saved-locations"
-
-// This is temporal until we implement color selection for saved locations.
-const DEFAULT_COLOR = "#0f6cbd"
 
 const parseSavedLocations = (value: unknown): SavedLocation[] => {
   if (!Array.isArray(value)) return DEFAULT_SAVED_LOCATIONS
@@ -40,6 +38,7 @@ export type UseSavedLocationsResult = {
   isLoading: boolean
   isSaved: (id: string) => boolean
   remove: (id: string) => void
+  setColor: (id: string, color: string) => void
   toggle: (location: Location, color?: string) => void
 }
 
@@ -70,7 +69,7 @@ export function SavedLocationsProvider({
   )
 
   const add = useCallback(
-    (location: Location, color: string = DEFAULT_COLOR) => {
+    (location: Location, color: string = DEFAULT_LOCATION_COLOR) => {
       setData((current) =>
         current.some((entry) => entry.id === location.id)
           ? current
@@ -87,12 +86,23 @@ export function SavedLocationsProvider({
     [setData],
   )
 
+  const setColor = useCallback(
+    (id: string, color: string) => {
+      setData((current) =>
+        current.map((entry) =>
+          entry.id === id ? { ...entry, color } : entry,
+        ),
+      )
+    },
+    [setData],
+  )
+
   const toggle = useCallback(
     (location: Location, color?: string) => {
       setData((current) =>
         current.some((entry) => entry.id === location.id)
           ? current.filter((entry) => entry.id !== location.id)
-          : [...current, { ...location, color: color ?? DEFAULT_COLOR }],
+          : [...current, { ...location, color: color ?? DEFAULT_LOCATION_COLOR }],
       )
     },
     [setData],
@@ -107,9 +117,10 @@ export function SavedLocationsProvider({
       isLoading,
       isSaved,
       remove,
+      setColor,
       toggle,
     }),
-    [add, data, error, findById, isLoading, isSaved, remove, toggle],
+    [add, data, error, findById, isLoading, isSaved, remove, setColor, toggle],
   )
 
   return <Context.Provider value={value}>{children}</Context.Provider>

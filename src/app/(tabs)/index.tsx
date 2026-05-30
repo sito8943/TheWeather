@@ -1,5 +1,5 @@
 import { router } from "expo-router"
-import { type ReactElement } from "react"
+import { type ReactElement, useState } from "react"
 import { Pressable, ScrollView } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
@@ -8,7 +8,11 @@ import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
 import { useAddCurrentLocation } from "#shared/location"
-import { SavedLocationCard, useSavedLocations } from "#shared/locations"
+import {
+  ColorPickerModal,
+  SavedLocationCard,
+  useSavedLocations,
+} from "#shared/locations"
 import { useThemedStyles } from "#shared/settings"
 
 export default function Home(): ReactElement {
@@ -22,6 +26,7 @@ export default function Home(): ReactElement {
     isOnline,
     isSaved: isCurrentLocationSaved,
   } = useAddCurrentLocation()
+  const [isPickingColor, setIsPickingColor] = useState(false)
 
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
@@ -30,10 +35,14 @@ export default function Home(): ReactElement {
         showsVerticalScrollIndicator={false}
       >
         <Typography variant="title">Your locations</Typography>
-        {isOnline && !isCurrentLocationSaved && currentLocationError === null ? (
+        {isOnline &&
+        !isCurrentLocationSaved &&
+        currentLocationError === null ? (
           <Pressable
             disabled={isLoadingCurrentLocation || currentLocation === null}
-            onPress={addCurrentLocation}
+            onPress={() => {
+              setIsPickingColor(true)
+            }}
             style={({ pressed }) => pressed && styles.promptPressed}
           >
             <Card style={styles.prompt}>
@@ -57,6 +66,20 @@ export default function Home(): ReactElement {
           />
         ))}
       </ScrollView>
+
+      {currentLocation === null ? null : (
+        <ColorPickerModal
+          locationName={currentLocation.name}
+          onCancel={() => {
+            setIsPickingColor(false)
+          }}
+          onConfirm={(color) => {
+            addCurrentLocation(color)
+            setIsPickingColor(false)
+          }}
+          visible={isPickingColor}
+        />
+      )}
     </SafeAreaView>
   )
 }
