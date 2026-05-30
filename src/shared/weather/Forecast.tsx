@@ -4,10 +4,14 @@ import { ScrollView, StyleSheet, View } from "react-native"
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { spacing } from "#design/foundations"
+import { useSettings } from "#shared/settings"
 
 import { type ForecastProps } from "./types"
+import { formatTemperature } from "./units"
 
 export default function Forecast({ data }: ForecastProps): ReactElement {
+  const { units } = useSettings()
+
   return (
     <Card style={styles.card}>
       <Typography variant="large">7-day forecast</Typography>
@@ -17,9 +21,13 @@ export default function Forecast({ data }: ForecastProps): ReactElement {
             <Typography variant="label">{day}</Typography>
             <View style={styles.info}>
               <View style={styles.temperatures}>
-                <Typography variant="muted">{temperatureMax} C --</Typography>
+                <Typography variant="muted">
+                  {formatTemperature(temperatureMax, units.temperature)}
+                </Typography>
 
-                <Typography variant="muted">{temperatureMin} C</Typography>
+                <Typography variant="muted">
+                  {formatTemperature(temperatureMin, units.temperature)}
+                </Typography>
               </View>
               <Typography variant="label">{condition}</Typography>
             </View>

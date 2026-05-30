@@ -4,8 +4,10 @@ import { StyleSheet, View } from "react-native"
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { spacing } from "#design/foundations"
+import { useSettings } from "#shared/settings"
 
 import { type CurrentWeatherProps } from "./types"
+import { formatTemperature, formatWind } from "./units"
 
 export default function CurrentWeather({
   cardStyle,
@@ -13,11 +15,15 @@ export default function CurrentWeather({
   location,
   locationColor,
 }: CurrentWeatherProps): ReactElement {
+  const { units } = useSettings()
+
   return (
     <Card style={[styles.card, cardStyle]}>
       <View style={styles.current}>
         <View>
-          <Typography variant="large">{data?.temperature ?? "--"} C</Typography>
+          <Typography variant="large">
+            {formatTemperature(data?.temperature, units.temperature)}
+          </Typography>
           <Typography variant="label">{data?.condition ?? "--"}</Typography>
         </View>
         <Typography
@@ -33,7 +39,7 @@ export default function CurrentWeather({
       <View style={styles.stats}>
         <View style={styles.stat}>
           <Typography variant="label">Wind</Typography>
-          <Typography>{data?.wind.toFixed(0) ?? "--"} km/h</Typography>
+          <Typography>{formatWind(data?.wind, units.wind)}</Typography>
         </View>
         <View style={styles.stat}>
           <Typography variant="label">Humidity</Typography>
