@@ -1,5 +1,7 @@
 import { render } from "@testing-library/react-native"
 
+import TextInput from "./TextInput"
+
 jest.mock("#shared/settings", () => ({
   useThemeColors: () => ({
     body: "#111827",
@@ -20,14 +22,12 @@ jest.mock("#shared/settings", () => ({
     }),
 }))
 
-import TextInput from "./TextInput"
-
 describe("Design > Elements > TextInput", () => {
   it("works", () => {
     const { getByDisplayValue } = render(
       <TextInput onChangeText={() => undefined} value="Barcelona" />,
     )
 
-    getByDisplayValue("Barcelona")
+    expect(getByDisplayValue("Barcelona")).toBeTruthy()
   })
 })

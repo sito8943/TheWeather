@@ -1,5 +1,7 @@
 import { fireEvent, render, userEvent } from "@testing-library/react-native"
 
+import ColorPickerModal from "./ColorPickerModal"
+
 jest.mock("#shared/settings", () => ({
   useThemeColors: () => ({
     body: "#111827",
@@ -20,8 +22,6 @@ jest.mock("#shared/settings", () => ({
     }),
 }))
 
-import ColorPickerModal from "./ColorPickerModal"
-
 describe("Locations > ColorPickerModal", () => {
   it("renders when visible", () => {
     const { getByText, getByDisplayValue } = render(
@@ -33,8 +33,8 @@ describe("Locations > ColorPickerModal", () => {
       />,
     )
 
-    getByText("Pick a color")
-    getByDisplayValue("#0f6cbd")
+    expect(getByText("Pick a color")).toBeTruthy()
+    expect(getByDisplayValue("#0f6cbd")).toBeTruthy()
   })
 
   it("validates input and confirms the normalized color", async () => {
@@ -52,7 +52,7 @@ describe("Locations > ColorPickerModal", () => {
     const input = getByDisplayValue("#1d4ed8")
 
     fireEvent.changeText(input, "not-a-color")
-    getByText("Enter a valid hex color (e.g. #0f6cbd).")
+    expect(getByText("Enter a valid hex color (e.g. #0f6cbd).")).toBeTruthy()
 
     fireEvent.changeText(input, "  #123abc  ")
     expect(

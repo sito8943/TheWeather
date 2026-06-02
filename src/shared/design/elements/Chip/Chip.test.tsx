@@ -1,5 +1,7 @@
 import { render, userEvent } from "@testing-library/react-native"
 
+import Chip from "./Chip"
+
 jest.mock("#shared/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
@@ -12,15 +14,13 @@ jest.mock("#shared/settings", () => ({
     }),
 }))
 
-import Chip from "./Chip"
-
 describe("Design > Elements > Chip", () => {
   it("works", () => {
     const { getByText } = render(
       <Chip active={false} label="Hourly" onPress={() => undefined} />,
     )
 
-    getByText("Hourly")
+    expect(getByText("Hourly")).toBeTruthy()
   })
 
   it("calls onPress when selected", async () => {

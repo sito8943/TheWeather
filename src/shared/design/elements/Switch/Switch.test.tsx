@@ -1,5 +1,7 @@
 import { render } from "@testing-library/react-native"
 
+import Switch from "./Switch"
+
 jest.mock("#shared/settings", () => ({
   useThemeColors: () => ({
     body: "#111827",
@@ -11,14 +13,12 @@ jest.mock("#shared/settings", () => ({
   }),
 }))
 
-import Switch from "./Switch"
-
 describe("Design > Elements > Switch", () => {
   it("renders", () => {
     const { getByRole } = render(
       <Switch onValueChange={() => undefined} value={true} />,
     )
 
-    getByRole("switch")
+    expect(getByRole("switch")).toBeTruthy()
   })
 })

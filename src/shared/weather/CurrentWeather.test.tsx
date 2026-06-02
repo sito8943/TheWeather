@@ -1,5 +1,7 @@
 import { render } from "@testing-library/react-native"
 
+import CurrentWeather from "./CurrentWeather"
+
 jest.mock("#shared/settings", () => ({
   TEMPERATURE_UNIT: {
     CELSIUS: "celsius",
@@ -26,8 +28,6 @@ jest.mock("#shared/settings", () => ({
     }),
 }))
 
-import CurrentWeather from "./CurrentWeather"
-
 describe("Weather > CurrentWeather", () => {
   it("works", () => {
     const { getByText } = render(
@@ -48,8 +48,8 @@ describe("Weather > CurrentWeather", () => {
       />,
     )
 
-    getByText("Barcelona")
-    getByText("23 °C")
-    getByText("12 km/h")
+    expect(getByText("Barcelona")).toBeTruthy()
+    expect(getByText("23 °C")).toBeTruthy()
+    expect(getByText("12 km/h")).toBeTruthy()
   })
 })

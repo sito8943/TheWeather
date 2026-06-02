@@ -1,5 +1,7 @@
 import { render } from "@testing-library/react-native"
 
+import Typography from "./Typography"
+
 jest.mock("#shared/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
@@ -11,8 +13,6 @@ jest.mock("#shared/settings", () => ({
       surface: "#ffffff",
     }),
 }))
-
-import Typography from "./Typography"
 
 describe("Design > Elements > Typography", () => {
   it("renders with the large styles", () => {

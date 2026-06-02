@@ -1,5 +1,8 @@
 import { render } from "@testing-library/react-native"
 
+import OfflineBanner from "./OfflineBanner"
+import useIsOnline from "./useIsOnline"
+
 jest.mock("react-native-safe-area-context", () => ({
   useSafeAreaInsets: () => ({ bottom: 0, left: 0, right: 0, top: 0 }),
 }))
@@ -21,9 +24,6 @@ jest.mock("./useIsOnline", () => ({
   default: jest.fn(),
 }))
 
-import OfflineBanner from "./OfflineBanner"
-import useIsOnline from "./useIsOnline"
-
 const mockedUseIsOnline = jest.mocked(useIsOnline)
 
 describe("Network > OfflineBanner", () => {
@@ -32,6 +32,6 @@ describe("Network > OfflineBanner", () => {
 
     const { getByText } = render(<OfflineBanner />)
 
-    getByText("No internet connection")
+    expect(getByText("No internet connection")).toBeTruthy()
   })
 })

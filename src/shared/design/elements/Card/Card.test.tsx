@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react-native"
 import { Text } from "react-native"
 
+import Card from "./Card"
+
 jest.mock("#shared/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
@@ -13,8 +15,6 @@ jest.mock("#shared/settings", () => ({
     }),
 }))
 
-import Card from "./Card"
-
 describe("Design > Elements > Card", () => {
   it("works", () => {
     const { getByText } = render(
@@ -23,6 +23,6 @@ describe("Design > Elements > Card", () => {
       </Card>,
     )
 
-    getByText("Hello")
+    expect(getByText("Hello")).toBeTruthy()
   })
 })
