@@ -20,10 +20,7 @@ export function formatTemperature(
   return `${Math.round(celsius)} °C`
 }
 
-export function formatWind(
-  kmh: number | undefined,
-  unit: WindUnit,
-): string {
+export function formatWind(kmh: number | undefined, unit: WindUnit): string {
   if (kmh === undefined) return "--"
 
   if (unit === WIND_UNIT.MPH) {

@@ -4,11 +4,7 @@ import { type ReactElement } from "react"
 
 import { SavedLocationsProvider } from "#shared/locations"
 import { OfflineBanner } from "#shared/network"
-import {
-  RESOLVED_THEME,
-  SettingsProvider,
-  useTheme,
-} from "#shared/settings"
+import { RESOLVED_THEME, SettingsProvider, useTheme } from "#shared/settings"
 
 export default function Layout(): ReactElement {
   return (
