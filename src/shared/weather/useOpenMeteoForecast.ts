@@ -13,7 +13,6 @@ import {
   type UseOpenMeteoForecastState,
 } from "./types"
 
-
 export default function useOpenMeteoForecast(
   location: ForecastLocation | null,
 ): UseOpenMeteoForecastState {

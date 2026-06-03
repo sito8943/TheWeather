@@ -58,7 +58,9 @@ export default function LocationDetails(): ReactElement {
                   <View
                     style={[
                       styles.swatch,
-                      { backgroundColor: savedLocation?.color ?? colors.border },
+                      {
+                        backgroundColor: savedLocation?.color ?? colors.border,
+                      },
                     ]}
                   />
                 </Pressable>

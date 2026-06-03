@@ -55,9 +55,7 @@ describe("Locations > ColorPickerModal", () => {
     expect(getByText("Enter a valid hex color (e.g. #0f6cbd).")).toBeTruthy()
 
     fireEvent.changeText(input, "  #123abc  ")
-    expect(
-      queryByText("Enter a valid hex color (e.g. #0f6cbd)."),
-    ).toBeNull()
+    expect(queryByText("Enter a valid hex color (e.g. #0f6cbd).")).toBeNull()
 
     await userEvent.press(getByText("Save"))
 

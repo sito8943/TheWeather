@@ -16,9 +16,7 @@ jest.mock("#shared/settings", () => ({
 
 describe("Design > Elements > Typography", () => {
   it("renders with the large styles", () => {
-    const { getByText } = render(
-      <Typography variant="large">Today</Typography>,
-    )
+    const { getByText } = render(<Typography variant="large">Today</Typography>)
 
     expect(getByText("Today")).toHaveStyle({ fontSize: 20 })
   })

@@ -12,9 +12,6 @@ export {
 } from "./color"
 export { default as SavedLocationCard } from "./SavedLocationCard"
 export { default as ColorPickerModal } from "./ColorPickerModal"
-export {
-  SavedLocationsProvider,
-  useSavedLocations,
-} from "./savedLocations"
+export { SavedLocationsProvider, useSavedLocations } from "./savedLocations"
 export type { UseSavedLocationsResult } from "./savedLocations"
 export type { Location, LocationId, SavedLocation } from "./types"

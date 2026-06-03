@@ -20,8 +20,7 @@ export const RESOLVED_THEME = {
   DARK: "dark",
 } as const
 
-export type ResolvedTheme =
-  (typeof RESOLVED_THEME)[keyof typeof RESOLVED_THEME]
+export type ResolvedTheme = (typeof RESOLVED_THEME)[keyof typeof RESOLVED_THEME]
 
 const PREFERENCE_CYCLE: Record<ThemePreference, ThemePreference> = {
   [THEME_PREFERENCE.LIGHT]: THEME_PREFERENCE.DARK,
