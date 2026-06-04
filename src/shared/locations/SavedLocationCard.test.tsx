@@ -32,6 +32,7 @@ describe("Locations > SavedLocationCard", () => {
             latitude: 41.3851,
             longitude: 2.1734,
             name: "Barcelona",
+            region: "Cataluña",
           }}
           onPress={() => undefined}
         />,

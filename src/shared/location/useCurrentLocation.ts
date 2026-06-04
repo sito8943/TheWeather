@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { findLocationByName, type Location } from "#shared/locations"
+import { findLocationByName, REGION, type Location } from "#shared/locations"
 
 import {
   getCurrentPosition,
@@ -54,6 +54,7 @@ export default function useCurrentLocation(): UseCurrentLocationResult {
             latitude: coords.latitude,
             longitude: coords.longitude,
             name: name ?? CURRENT_LOCATION_FALLBACK_NAME,
+            region: REGION.OTHER,
           },
         )
       } catch (caught) {

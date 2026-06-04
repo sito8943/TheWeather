@@ -1,7 +1,14 @@
+import { type StyleProp, type ViewStyle } from "react-native"
+
 import { type OpenMeteoLocation } from "#shared/weather"
+
+import { type REGION } from "./constants"
+
+export type Region = (typeof REGION)[keyof typeof REGION]
 
 export type Location = {
   id: string
+  region: Region
 } & OpenMeteoLocation
 
 export type SavedLocation = Location & {
@@ -10,7 +17,20 @@ export type SavedLocation = Location & {
 
 export type LocationId = Location["id"]
 
+export type LocationSection = {
+  data: Location[]
+  title: Region
+}
+
 export type SavedLocationCardProps = {
   location: SavedLocation
   onPress: () => void
+}
+
+export type ExploreCardProps = {
+  color?: string
+  disabled?: boolean
+  label: string
+  onPress: () => void
+  style?: StyleProp<ViewStyle>
 }

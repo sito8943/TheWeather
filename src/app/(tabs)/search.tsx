@@ -1,16 +1,16 @@
 import { router } from "expo-router"
 import { type ReactElement, useState } from "react"
-import { Pressable, ScrollView, View } from "react-native"
+import { ScrollView, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
-import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
-import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import { spacing, type ThemeColors } from "#design/foundations"
 import { useAddCurrentLocation } from "#shared/location"
 import {
   ColorPickerModal,
+  ExploreCard,
   searchLocations,
   useSavedLocations,
 } from "#shared/locations"
@@ -42,26 +42,22 @@ export default function Search(): ReactElement {
         </Typography>
 
         {!isCurrentLocationSaved && currentLocationError === null ? (
-          <Pressable
+          <ExploreCard
             disabled={
               isLoadingCurrentLocation || currentLocation === null || !isOnline
+            }
+            label={
+              !isOnline
+                ? "Offline"
+                : isLoadingCurrentLocation
+                  ? "Locating…"
+                  : `Use my location${currentLocation === null ? "" : `: ${currentLocation.name}`}`
             }
             onPress={() => {
               setIsPickingColor(true)
             }}
-            style={({ pressed }) => [
-              styles.currentLocationButton,
-              pressed && styles.currentLocationButtonPressed,
-            ]}
-          >
-            <Typography variant="label">
-              {!isOnline
-                ? "Offline"
-                : isLoadingCurrentLocation
-                  ? "Locating…"
-                  : `Use my location${currentLocation === null ? "" : `: ${currentLocation.name}`}`}
-            </Typography>
-          </Pressable>
+            style={styles.currentLocation}
+          />
         ) : null}
 
         <TextInput
@@ -78,42 +74,20 @@ export default function Search(): ReactElement {
         ) : null}
 
         <View style={styles.catalogContainer}>
-          {results.map((location) => {
-            const savedColor = findById(location.id)?.color
-            return (
-              <Pressable
-                key={location.id}
-                onPress={() => {
-                  router.push({
-                    params: { id: location.id },
-                    pathname: "/locations/[id]",
-                  })
-                }}
-                style={styles.gridItem}
-              >
-                <Card
-                  style={[
-                    styles.catalogCard,
-                    savedColor === undefined
-                      ? undefined
-                      : { borderColor: savedColor },
-                  ]}
-                >
-                  <View style={styles.row}>
-                    <Typography
-                      style={
-                        savedColor === undefined
-                          ? undefined
-                          : { color: savedColor }
-                      }
-                    >
-                      {location.name}
-                    </Typography>
-                  </View>
-                </Card>
-              </Pressable>
-            )
-          })}
+          {results.map((location) => (
+            <ExploreCard
+              color={findById(location.id)?.color}
+              key={location.id}
+              label={location.name}
+              onPress={() => {
+                router.push({
+                  params: { id: location.id },
+                  pathname: "/locations/[id]",
+                })
+              }}
+              style={styles.gridItem}
+            />
+          ))}
         </View>
       </ScrollView>
 
@@ -142,14 +116,6 @@ const createStyles = (colors: ThemeColors) => ({
     justifyContent: "space-between" as const,
     width: "100%" as const,
   },
-  catalogCard: {
-    borderColor: colors.border,
-    borderRadius: shapes.borderRadius,
-    borderWidth: 1,
-    margin: 0,
-    paddingVertical: spacing.between,
-    width: "100%" as const,
-  },
   container: {
     backgroundColor: colors.background,
     flex: 1,
@@ -159,19 +125,9 @@ const createStyles = (colors: ThemeColors) => ({
     paddingHorizontal: spacing.inside,
     paddingVertical: spacing.between,
   },
-  currentLocationButton: {
-    alignItems: "center" as const,
-    backgroundColor: colors.surface,
-    borderColor: colors.border,
-    borderRadius: shapes.borderRadius,
-    borderWidth: 1,
+  currentLocation: {
     marginBottom: spacing.between,
-    paddingHorizontal: spacing.inside,
-    paddingVertical: spacing.between,
     width: "100%" as const,
-  },
-  currentLocationButtonPressed: {
-    opacity: 0.7,
   },
   emptyState: {
     marginBottom: spacing.between,
@@ -182,10 +138,6 @@ const createStyles = (colors: ThemeColors) => ({
   gridItem: {
     flexBasis: "48%" as const,
     flexGrow: 0,
-  },
-  row: {
-    alignItems: "center" as const,
-    justifyContent: "center" as const,
   },
   searchInput: {
     marginBottom: spacing.between,

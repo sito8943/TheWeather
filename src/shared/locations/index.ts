@@ -4,6 +4,8 @@ export {
   findLocationByName,
 } from "./locationCatalog"
 export { searchLocations } from "./searchLocations"
+export { REGION } from "./constants"
+export { groupLocationsByRegion } from "./utils"
 export {
   DEFAULT_LOCATION_COLOR,
   PRESET_LOCATION_COLORS,
@@ -11,7 +13,14 @@ export {
   normalizeHexColor,
 } from "./color"
 export { default as SavedLocationCard } from "./SavedLocationCard"
+export { default as ExploreCard } from "./ExploreCard"
 export { default as ColorPickerModal } from "./ColorPickerModal"
 export { SavedLocationsProvider, useSavedLocations } from "./savedLocations"
 export type { UseSavedLocationsResult } from "./savedLocations"
-export type { Location, LocationId, SavedLocation } from "./types"
+export type {
+  Location,
+  LocationId,
+  LocationSection,
+  Region,
+  SavedLocation,
+} from "./types"
