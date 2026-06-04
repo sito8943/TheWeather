@@ -1,10 +1,10 @@
 import { Stack, useLocalSearchParams } from "expo-router"
 import { type ReactElement, useState } from "react"
-import { Pressable, ScrollView, View } from "react-native"
+import { ScrollView, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
-import Icon from "#design/elements/Icon"
+import IconButton from "#design/elements/IconButton"
 import Typography from "#design/elements/Typography"
 import { spacing, type ThemeColors } from "#design/foundations"
 import {
@@ -48,12 +48,11 @@ export default function LocationDetails(): ReactElement {
           headerRight: () => (
             <View style={styles.headerActions}>
               {saved ? (
-                <Pressable
-                  hitSlop={8}
+                <IconButton
+                  accessibilityLabel="Change color"
                   onPress={() => {
                     setIsPickingColor(true)
                   }}
-                  style={styles.headerAction}
                 >
                   <View
                     style={[
@@ -63,10 +62,14 @@ export default function LocationDetails(): ReactElement {
                       },
                     ]}
                   />
-                </Pressable>
+                </IconButton>
               ) : null}
-              <Pressable
-                hitSlop={8}
+              <IconButton
+                accessibilityLabel={
+                  saved ? "Remove from saved" : "Save location"
+                }
+                icon={saved ? "heart" : "heartOutline"}
+                iconColor={saved ? colors.negative : colors.body}
                 onPress={() => {
                   if (saved) {
                     remove(location.id)
@@ -74,14 +77,7 @@ export default function LocationDetails(): ReactElement {
                     setIsPickingColor(true)
                   }
                 }}
-                style={styles.headerAction}
-              >
-                <Icon
-                  color={saved ? colors.negative : colors.body}
-                  icon={saved ? "heart" : "heartOutline"}
-                  size={22}
-                />
-              </Pressable>
+              />
             </View>
           ),
           title: location.name,
@@ -125,6 +121,7 @@ const createStyles = (colors: ThemeColors) => ({
     flex: 1,
   },
   content: {
+    gap: spacing.between,
     alignItems: "center" as const,
     paddingHorizontal: spacing.between,
     paddingVertical: spacing.between,
@@ -140,9 +137,6 @@ const createStyles = (colors: ThemeColors) => ({
     alignItems: "center" as const,
     flexDirection: "row" as const,
     gap: spacing.sm,
-  },
-  headerAction: {
-    paddingHorizontal: spacing.sm,
   },
   swatch: {
     borderRadius: 999,

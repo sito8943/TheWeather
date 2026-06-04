@@ -47,6 +47,10 @@ export default function Layout(): ReactElement {
           ),
         }}
       />
+      <Tabs.Screen
+        name="locations"
+        options={{ headerShown: false, href: null }}
+      />
     </Tabs>
   )
 }
