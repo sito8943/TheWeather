@@ -5,7 +5,11 @@ import Icon from "#design/elements/Icon"
 import { shapes, spacing } from "#design/foundations"
 import { useThemeColors } from "#shared/settings"
 
-import { BUTTON_SIZES, ICON_BUTTON_SIZE, ICON_BUTTON_VARIANT } from "./constants"
+import {
+  BUTTON_SIZES,
+  ICON_BUTTON_SIZE,
+  ICON_BUTTON_VARIANT,
+} from "./constants"
 import { type IconButtonProps } from "./types"
 import { getContainerStyle, getIconColor } from "./utils"
 

@@ -2,10 +2,7 @@ import { REGION } from "./constants"
 import { type Location } from "./types"
 import { groupLocationsByRegion } from "./utils"
 
-const makeLocation = (
-  id: string,
-  region: Location["region"],
-): Location => ({
+const makeLocation = (id: string, region: Location["region"]): Location => ({
   id,
   latitude: 0,
   longitude: 0,
@@ -27,9 +24,7 @@ describe("Locations > groupLocationsByRegion", () => {
 
     expect(sections).toEqual([
       {
-        data: [
-          makeLocation("sevilla", REGION.ANDALUCIA),
-        ],
+        data: [makeLocation("sevilla", REGION.ANDALUCIA)],
         title: REGION.ANDALUCIA,
       },
       {
