@@ -73,7 +73,7 @@ export function SavedLocationsProvider({
       setData((current) =>
         current.some((entry) => entry.id === location.id)
           ? current
-          : [...current, { ...location, color }],
+          : [{ ...location, color }, ...current],
       )
     },
     [setData],
@@ -101,8 +101,8 @@ export function SavedLocationsProvider({
         current.some((entry) => entry.id === location.id)
           ? current.filter((entry) => entry.id !== location.id)
           : [
-              ...current,
               { ...location, color: color ?? DEFAULT_LOCATION_COLOR },
+              ...current,
             ],
       )
     },

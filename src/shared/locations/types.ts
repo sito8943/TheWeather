@@ -25,6 +25,7 @@ export type LocationSection = {
 export type SavedLocationCardProps = {
   location: SavedLocation
   onPress: () => void
+  reloadToken?: number
 }
 
 export type ExploreCardProps = {

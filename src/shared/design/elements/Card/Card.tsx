@@ -22,7 +22,6 @@ const createStyles = (colors: ThemeColors) => ({
     backgroundColor: colors.surface,
     borderRadius: shapes.borderRadius,
     justifyContent: "center" as const,
-    margin: spacing.between,
     padding: spacing.inside,
     width: "100%" as const,
     ...createShadows(colors).main,

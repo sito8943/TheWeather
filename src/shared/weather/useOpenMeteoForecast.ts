@@ -15,6 +15,7 @@ import {
 
 export default function useOpenMeteoForecast(
   location: ForecastLocation | null,
+  reloadToken = 0,
 ): UseOpenMeteoForecastState {
   const latitude = location?.latitude
   const longitude = location?.longitude
@@ -82,7 +83,7 @@ export default function useOpenMeteoForecast(
     }
 
     void fetchForecast()
-  }, [latitude, longitude, isOnline])
+  }, [latitude, longitude, isOnline, reloadToken])
 
   return state
 }

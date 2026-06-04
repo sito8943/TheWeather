@@ -8,8 +8,9 @@ import { type SavedLocationCardProps } from "./types"
 export default function SavedLocationCard({
   location,
   onPress,
+  reloadToken,
 }: SavedLocationCardProps): ReactElement {
-  const { data } = useOpenMeteoForecast(location)
+  const { data } = useOpenMeteoForecast(location, reloadToken)
 
   return (
     <Pressable

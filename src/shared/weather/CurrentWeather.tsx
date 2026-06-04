@@ -57,14 +57,15 @@ export default function CurrentWeather({
 const styles = StyleSheet.create({
   card: {
     alignItems: "flex-start",
+    marginHorizontal: 0,
   },
   current: {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    width: "100%",
     marginBottom: spacing.between,
+    width: "100%",
   },
-  stats: { flexDirection: "row" },
+  stats: { flexDirection: "row", width: "100%" },
   stat: { flex: 1, alignItems: "flex-start" },
 })
