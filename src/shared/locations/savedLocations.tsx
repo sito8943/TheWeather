@@ -38,6 +38,7 @@ export type UseSavedLocationsResult = {
   isLoading: boolean
   isSaved: (id: string) => boolean
   remove: (id: string) => void
+  reorder: (orderedIds: string[]) => void
   setColor: (id: string, color: string) => void
   toggle: (location: Location, color?: string) => void
 }
@@ -86,6 +87,23 @@ export function SavedLocationsProvider({
     [setData],
   )
 
+  const reorder = useCallback(
+    (orderedIds: string[]) => {
+      setData((current) => {
+        const byId = new Map(current.map((entry) => [entry.id, entry]))
+        const ordered = orderedIds
+          .map((id) => byId.get(id))
+          .filter((entry): entry is SavedLocation => entry !== undefined)
+        // Keep any not present in the order list (defensive) at the end.
+        const missing = current.filter(
+          (entry) => !orderedIds.includes(entry.id),
+        )
+        return [...ordered, ...missing]
+      })
+    },
+    [setData],
+  )
+
   const setColor = useCallback(
     (id: string, color: string) => {
       setData((current) =>
@@ -118,10 +136,22 @@ export function SavedLocationsProvider({
       isLoading,
       isSaved,
       remove,
+      reorder,
       setColor,
       toggle,
     }),
-    [add, data, error, findById, isLoading, isSaved, remove, setColor, toggle],
+    [
+      add,
+      data,
+      error,
+      findById,
+      isLoading,
+      isSaved,
+      remove,
+      reorder,
+      setColor,
+      toggle,
+    ],
   )
 
   return <Context.Provider value={value}>{children}</Context.Provider>

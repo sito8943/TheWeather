@@ -5,6 +5,7 @@ import {
   faHeart,
   faHouse,
   faMagnifyingGlass,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons"
 
 export const APP_ICONS: Record<string, IconProp> = {
@@ -13,4 +14,5 @@ export const APP_ICONS: Record<string, IconProp> = {
   home: faHouse,
   search: faMagnifyingGlass,
   settings: faGear,
+  trash: faTrash,
 }

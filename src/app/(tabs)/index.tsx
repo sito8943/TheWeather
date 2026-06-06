@@ -1,12 +1,15 @@
 import { router } from "expo-router"
 import { type ReactElement, useCallback, useState } from "react"
-import { FlatList, Pressable } from "react-native"
+import { Alert, Pressable, View } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import DraggableList from "#design/patterns/DraggableList"
+import SwipeToDelete from "#design/patterns/SwipeToDelete"
+import { haptics } from "#shared/haptics"
 import { useAddCurrentLocation } from "#shared/location"
 import {
   ColorPickerModal,
@@ -20,7 +23,7 @@ const REFRESH_SETTLE_MS = 800
 
 export default function Home(): ReactElement {
   const styles = useThemedStyles(createStyles)
-  const { data: savedLocations } = useSavedLocations()
+  const { data: savedLocations, remove, reorder } = useSavedLocations()
   const {
     add: addCurrentLocation,
     currentLocation,
@@ -41,56 +44,80 @@ export default function Home(): ReactElement {
     }, REFRESH_SETTLE_MS)
   }, [])
 
+  const confirmRemove = useCallback(
+    (location: SavedLocation) => {
+      Alert.alert("Remove location", `Remove ${location.name}?`, [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: () => {
+            remove(location.id)
+            haptics.success()
+          },
+        },
+      ])
+    },
+    [remove],
+  )
+
   const renderItem = useCallback(
-    ({ item }: { item: SavedLocation }) => (
-      <SavedLocationCard
-        location={item}
-        onPress={() => {
-          router.push(`/locations/${item.id}`)
+    (item: SavedLocation) => (
+      <SwipeToDelete
+        onDelete={() => {
+          confirmRemove(item)
         }}
-        reloadToken={reloadToken}
-      />
+      >
+        <SavedLocationCard
+          location={item}
+          onPress={() => {
+            router.push(`/locations/${item.id}`)
+          }}
+          reloadToken={reloadToken}
+        />
+      </SwipeToDelete>
     ),
-    [reloadToken],
+    [confirmRemove, reloadToken],
   )
 
   const showPrompt =
     isOnline && !isCurrentLocationSaved && currentLocationError === null
 
+  const header = (
+    <View style={styles.header}>
+      <Typography variant="title">Your locations</Typography>
+      {showPrompt ? (
+        <Pressable
+          disabled={isLoadingCurrentLocation || currentLocation === null}
+          onPress={() => {
+            setIsPickingColor(true)
+          }}
+          style={({ pressed }) => pressed && styles.promptPressed}
+        >
+          <Card style={styles.prompt}>
+            <Typography variant="label" style={styles.promptText}>
+              {isLoadingCurrentLocation
+                ? "Locating…"
+                : currentLocation === null
+                  ? "Unable to read location"
+                  : `Add your location: ${currentLocation.name}`}
+            </Typography>
+          </Card>
+        </Pressable>
+      ) : null}
+    </View>
+  )
+
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.content}
+      <DraggableList
         data={savedLocations}
+        header={header}
         keyExtractor={(location) => location.id}
-        ListHeaderComponent={
-          <>
-            <Typography variant="title">Your locations</Typography>
-            {showPrompt ? (
-              <Pressable
-                disabled={isLoadingCurrentLocation || currentLocation === null}
-                onPress={() => {
-                  setIsPickingColor(true)
-                }}
-                style={({ pressed }) => pressed && styles.promptPressed}
-              >
-                <Card style={styles.prompt}>
-                  <Typography variant="label" style={styles.promptText}>
-                    {isLoadingCurrentLocation
-                      ? "Locating…"
-                      : currentLocation === null
-                        ? "Unable to read location"
-                        : `Add your location: ${currentLocation.name}`}
-                  </Typography>
-                </Card>
-              </Pressable>
-            ) : null}
-          </>
-        }
         onRefresh={handleRefresh}
+        onReorder={reorder}
         refreshing={refreshing}
         renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
       />
 
       {currentLocation === null ? null : (
@@ -111,13 +138,12 @@ export default function Home(): ReactElement {
 }
 
 const createStyles = (colors: ThemeColors) => ({
-  content: {
-    gap: spacing.between,
-    paddingHorizontal: spacing.between,
-    paddingVertical: spacing.between,
-  },
   container: {
     backgroundColor: colors.background,
+    flex: 1,
+  },
+  header: {
+    gap: spacing.between,
   },
   prompt: {
     alignItems: "flex-start" as const,
