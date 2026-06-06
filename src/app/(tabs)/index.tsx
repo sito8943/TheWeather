@@ -1,12 +1,14 @@
 import { router } from "expo-router"
 import { type ReactElement, useCallback, useState } from "react"
-import { FlatList, Pressable } from "react-native"
+import { Alert, FlatList, Pressable } from "react-native"
 
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import SwipeToDelete from "#design/patterns/SwipeToDelete"
+import { haptics } from "#shared/haptics"
 import { useAddCurrentLocation } from "#shared/location"
 import {
   ColorPickerModal,
@@ -20,7 +22,7 @@ const REFRESH_SETTLE_MS = 800
 
 export default function Home(): ReactElement {
   const styles = useThemedStyles(createStyles)
-  const { data: savedLocations } = useSavedLocations()
+  const { data: savedLocations, remove } = useSavedLocations()
   const {
     add: addCurrentLocation,
     currentLocation,
@@ -41,17 +43,40 @@ export default function Home(): ReactElement {
     }, REFRESH_SETTLE_MS)
   }, [])
 
+  const confirmRemove = useCallback(
+    (location: SavedLocation) => {
+      Alert.alert("Remove location", `Remove ${location.name}?`, [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: () => {
+            remove(location.id)
+            haptics.success()
+          },
+        },
+      ])
+    },
+    [remove],
+  )
+
   const renderItem = useCallback(
     ({ item }: { item: SavedLocation }) => (
-      <SavedLocationCard
-        location={item}
-        onPress={() => {
-          router.push(`/locations/${item.id}`)
+      <SwipeToDelete
+        onDelete={() => {
+          confirmRemove(item)
         }}
-        reloadToken={reloadToken}
-      />
+      >
+        <SavedLocationCard
+          location={item}
+          onPress={() => {
+            router.push(`/locations/${item.id}`)
+          }}
+          reloadToken={reloadToken}
+        />
+      </SwipeToDelete>
     ),
-    [reloadToken],
+    [confirmRemove, reloadToken],
   )
 
   const showPrompt =
