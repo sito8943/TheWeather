@@ -8,6 +8,7 @@ const config: KnipConfiguration = {
     "expo-updates",
     "expo-system-ui",
     "@expo/vector-icons",
+    "expo-font",
     "eslint-config-expo",
   ],
   ignoreBinaries: ["eas-cli"],
