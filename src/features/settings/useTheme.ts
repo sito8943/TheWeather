@@ -1,11 +1,7 @@
 import { useCallback, useMemo } from "react"
 import { useColorScheme, type ColorSchemeName } from "react-native"
 
-import {
-  darkColors,
-  lightColors,
-  type ThemeColors,
-} from "#design/foundations"
+import { darkColors, lightColors, type ThemeColors } from "#design/foundations"
 
 import {
   THEME_PREFERENCE,
