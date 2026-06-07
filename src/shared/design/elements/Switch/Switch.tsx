@@ -1,7 +1,7 @@
 import { type ReactElement } from "react"
 import { Switch as RNSwitch } from "react-native"
 
-import { useThemeColors } from "#shared/settings"
+import { useThemeColors } from "#features/settings"
 
 import { type SwitchProps } from "./types"
 

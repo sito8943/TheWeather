@@ -10,8 +10,8 @@ import { scheduleOnRN } from "react-native-worklets"
 
 import Icon from "#design/elements/Icon"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
+import { useThemedStyles } from "#features/settings"
 import { haptics } from "#shared/haptics"
-import { useThemedStyles } from "#shared/settings"
 
 import { HORIZONTAL_SLOP, TRIGGER_RATIO } from "./constants"
 import { type SwipeToDeleteProps } from "./types"

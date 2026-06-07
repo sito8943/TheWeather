@@ -6,6 +6,7 @@
   "type": "module",
   "imports": {
     "#design/*": "./src/shared/design/*/index.ts",
+    "#features/*": "./src/features/*/index.ts",
     "#shared/*": "./src/shared/*/index.ts"
   },
   "scripts": {

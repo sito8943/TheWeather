@@ -3,7 +3,7 @@ import {
   WIND_UNIT,
   type TemperatureUnit,
   type WindUnit,
-} from "#shared/settings"
+} from "#features/settings"
 
 // Open-Meteo returns Celsius and km/h. Conversions happen at display time.
 

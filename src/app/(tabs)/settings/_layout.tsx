@@ -1,7 +1,7 @@
 import { Drawer } from "expo-router/drawer"
 import { type ReactElement } from "react"
 
-import { useThemeColors } from "#shared/settings"
+import { useThemeColors } from "#features/settings"
 
 export default function Layout(): ReactElement {
   const colors = useThemeColors()

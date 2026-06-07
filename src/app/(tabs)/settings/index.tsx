@@ -9,7 +9,7 @@ import {
   useTheme,
   useThemedStyles,
   type ThemePreference,
-} from "#shared/settings"
+} from "#features/settings"
 
 const PREFERENCES: Array<{ label: string; value: ThemePreference }> = [
   { label: "Light", value: THEME_PREFERENCE.LIGHT },

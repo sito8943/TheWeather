@@ -3,7 +3,7 @@ import { Text } from "react-native"
 
 import Card from "./Card"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
       body: "#111827",

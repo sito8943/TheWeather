@@ -2,7 +2,7 @@
 
 TheWeather is a mobile weather app that helps users quickly check the weather in different places. Users can search for a city, use their current location, and save their favorite locations for quick access. They can also reorder or remove saved places. When there is no internet connection, the app shows clear feedback instead of failing silently. This makes it useful for users who often check the weather in more than one location
 
-TheWeather is built with Expo and React Native. It uses Expo Router, so the app routes live inside `src/app`. Most of the app logic is separated by feature in `src/shared`, and each feature exposes its public functions and components through an `index.ts` file.
+TheWeather is built with Expo and React Native. It uses Expo Router, so the app routes live inside `src/app`. Most of the app logic is separated by feature in `src/features`, while cross-cutting utilities and reusable infrastructure stay in `src/shared`. Each feature exposes its public functions and components through an `index.ts` file.
 
 The app saves user data locally, uses device location for current-place weather, handles offline states, and connects to an external weather API for forecast data. It also includes tests for components, utilities, and domain logic.
 
@@ -21,17 +21,17 @@ The app saves user data locally, uses device location for current-place weather,
 ## Project Structure
 
 - `src/app`: file-based routing and screen entry points
+- `src/features/location`: current-device location feature
+- `src/features/locations`: saved locations feature, catalog, and related UI
+- `src/features/settings`: settings, theming, and app preferences
+- `src/features/weather`: weather domain logic and forecast rendering
 - `src/shared/design`: reusable UI primitives and design patterns
-- `src/shared/weather`: weather domain logic and forecast rendering
-- `src/shared/locations`: saved locations domain, catalog, and related UI
-- `src/shared/location`: current-device location logic
 - `src/shared/network`: connectivity-aware UI and network helpers
-- `src/shared/settings`: settings, theming, and app preferences
 - `src/shared/storage`: persistence helpers
 - `src/shared/haptics`: interaction feedback helpers
 - `src/test`: shared test support utilities
 
-Each domain has its own module with an `index.ts` file that works as the entry point. Other parts of the app import from there instead of accessing internal files directly.
+Each feature or shared module has its own `index.ts` entry point. Other parts of the app import from those public surfaces instead of reaching into internal files directly.
 
 ## Getting Started
 

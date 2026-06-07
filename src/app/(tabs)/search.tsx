@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { spacing, type ThemeColors } from "#design/foundations"
-import { useAddCurrentLocation } from "#shared/location"
+import { useAddCurrentLocation } from "#features/location"
 import {
   ColorPickerModal,
   ExploreCard,
@@ -15,8 +15,8 @@ import {
   searchLocations,
   useSavedLocations,
   type Location,
-} from "#shared/locations"
-import { useThemedStyles } from "#shared/settings"
+} from "#features/locations"
+import { useThemedStyles } from "#features/settings"
 
 const INITIAL_VISIBLE_COUNT = 12
 const PAGE_SIZE = 8

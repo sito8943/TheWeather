@@ -1,7 +1,7 @@
 import { type ReactElement } from "react"
 import { Pressable, StyleSheet } from "react-native"
 
-import { CurrentWeather, useOpenMeteoForecast } from "#shared/weather"
+import { CurrentWeather, useOpenMeteoForecast } from "#features/weather"
 
 import { type SavedLocationCardProps } from "./types"
 

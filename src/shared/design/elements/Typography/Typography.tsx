@@ -3,7 +3,7 @@ import { type ReactElement, type ReactNode } from "react"
 import { Text, type StyleProp, type TextStyle } from "react-native"
 
 import { createTypography, type TypographyVariant } from "#design/foundations"
-import { useThemedStyles } from "#shared/settings"
+import { useThemedStyles } from "#features/settings"
 
 type TypographyBaseProps = {
   children: ReactNode

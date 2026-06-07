@@ -5,7 +5,7 @@ import {
   darkColors,
   lightColors,
   type ThemeColors,
-} from "../design/foundations/colors"
+} from "#design/foundations"
 
 import {
   THEME_PREFERENCE,

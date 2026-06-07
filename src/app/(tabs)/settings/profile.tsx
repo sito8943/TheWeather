@@ -4,7 +4,7 @@ import { View } from "react-native"
 import Switch from "#design/elements/Switch"
 import Typography from "#design/elements/Typography"
 import { spacing, type ThemeColors } from "#design/foundations"
-import { useThemedStyles, useUnits } from "#shared/settings"
+import { useThemedStyles, useUnits } from "#features/settings"
 
 export default function Profile(): ReactElement {
   const styles = useThemedStyles(createStyles)

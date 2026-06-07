@@ -2,7 +2,7 @@ import { render } from "@testing-library/react-native"
 
 import Typography from "./Typography"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
       body: "#111827",

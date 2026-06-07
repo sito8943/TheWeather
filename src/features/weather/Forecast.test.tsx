@@ -2,7 +2,7 @@ import { render } from "@testing-library/react-native"
 
 import Forecast from "./Forecast"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   TEMPERATURE_UNIT: {
     CELSIUS: "celsius",
     FAHRENHEIT: "fahrenheit",

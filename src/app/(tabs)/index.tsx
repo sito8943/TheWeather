@@ -9,15 +9,15 @@ import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
 import DraggableList from "#design/patterns/DraggableList"
 import SwipeToDelete from "#design/patterns/SwipeToDelete"
-import { haptics } from "#shared/haptics"
-import { useAddCurrentLocation } from "#shared/location"
+import { useAddCurrentLocation } from "#features/location"
 import {
   ColorPickerModal,
   SavedLocationCard,
   type SavedLocation,
   useSavedLocations,
-} from "#shared/locations"
-import { useThemedStyles } from "#shared/settings"
+} from "#features/locations"
+import { useThemedStyles } from "#features/settings"
+import { haptics } from "#shared/haptics"
 
 const REFRESH_SETTLE_MS = 800
 

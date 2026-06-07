@@ -2,7 +2,7 @@ import { render } from "@testing-library/react-native"
 
 import SavedLocationCard from "./SavedLocationCard"
 
-jest.mock("#shared/weather", () => {
+jest.mock("#features/weather", () => {
   return {
     __esModule: true,
     CurrentWeather: jest.fn(() => null),

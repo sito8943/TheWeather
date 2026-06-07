@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from "react-native"
 import Card from "#design/elements/Card"
 import Typography from "#design/elements/Typography"
 import { spacing } from "#design/foundations"
-import { useSettings } from "#shared/settings"
+import { useSettings } from "#features/settings"
 
 import { type ForecastProps } from "./types"
 import { formatTemperature } from "./units"

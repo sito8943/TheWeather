@@ -2,7 +2,7 @@ import { render, userEvent } from "@testing-library/react-native"
 
 import Chip from "./Chip"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemedStyles: (factory: (colors: Record<string, string>) => unknown) =>
     factory({
       body: "#111827",

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-import { type ThemeColors } from "../design/foundations/colors"
+import { type ThemeColors } from "#design/foundations"
 
 import { useThemeColors } from "./useTheme"
 

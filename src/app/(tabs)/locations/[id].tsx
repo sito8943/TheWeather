@@ -11,9 +11,9 @@ import {
   ColorPickerModal,
   findLocationById,
   useSavedLocations,
-} from "#shared/locations"
-import { useThemeColors, useThemedStyles } from "#shared/settings"
-import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#shared/weather"
+} from "#features/locations"
+import { useThemeColors, useThemedStyles } from "#features/settings"
+import { CurrentWeather, Forecast, useOpenMeteoForecast } from "#features/weather"
 
 export default function LocationDetails(): ReactElement {
   const styles = useThemedStyles(createStyles)

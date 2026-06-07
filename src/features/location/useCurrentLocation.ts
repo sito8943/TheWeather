@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 
-import { findLocationByName, REGION, type Location } from "#shared/locations"
+import { findLocationByName, REGION, type Location } from "#features/locations"
 
 import {
   getCurrentPosition,

@@ -5,7 +5,7 @@ import Card from "#design/elements/Card"
 import TextInput from "#design/elements/TextInput"
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
-import { useThemedStyles } from "#shared/settings"
+import { useThemedStyles } from "#features/settings"
 
 import {
   DEFAULT_LOCATION_COLOR,

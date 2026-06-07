@@ -35,7 +35,7 @@ jest.mock("@fortawesome/react-native-fontawesome", () => ({
   FontAwesomeIcon: () => null,
 }))
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemedStyles: (factory: (colors: { negative: string }) => unknown) =>
     factory({ negative: "#dc2626" }),
 }))

@@ -2,7 +2,7 @@ import { render } from "@testing-library/react-native"
 
 import TextInput from "./TextInput"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemeColors: () => ({
     body: "#111827",
     border: "#d1d5db",

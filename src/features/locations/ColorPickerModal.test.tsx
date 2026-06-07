@@ -2,7 +2,7 @@ import { fireEvent, render, userEvent } from "@testing-library/react-native"
 
 import ColorPickerModal from "./ColorPickerModal"
 
-jest.mock("#shared/settings", () => ({
+jest.mock("#features/settings", () => ({
   useThemeColors: () => ({
     body: "#111827",
     border: "#d1d5db",

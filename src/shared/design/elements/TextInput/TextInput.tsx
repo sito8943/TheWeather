@@ -2,7 +2,7 @@ import { type ReactElement } from "react"
 import { TextInput as RNTextInput } from "react-native"
 
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
-import { useThemeColors, useThemedStyles } from "#shared/settings"
+import { useThemeColors, useThemedStyles } from "#features/settings"
 
 import { type TextInputProps } from "./types"
 

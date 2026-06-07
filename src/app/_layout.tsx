@@ -4,9 +4,9 @@ import { type ReactElement } from "react"
 import { StyleSheet } from "react-native"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 
-import { SavedLocationsProvider } from "#shared/locations"
+import { SavedLocationsProvider } from "#features/locations"
+import { RESOLVED_THEME, SettingsProvider, useTheme } from "#features/settings"
 import { OfflineBanner } from "#shared/network"
-import { RESOLVED_THEME, SettingsProvider, useTheme } from "#shared/settings"
 
 export default function Layout(): ReactElement {
   return (

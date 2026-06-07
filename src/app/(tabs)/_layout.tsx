@@ -2,7 +2,7 @@ import { Tabs } from "expo-router"
 import { type ReactElement } from "react"
 
 import Icon from "#design/elements/Icon"
-import { useThemeColors } from "#shared/settings"
+import { useThemeColors } from "#features/settings"
 
 export default function Layout(): ReactElement {
   const colors = useThemeColors()

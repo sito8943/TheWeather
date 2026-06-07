@@ -1,6 +1,6 @@
 import { type StyleProp, type ViewStyle } from "react-native"
 
-import { type OpenMeteoLocation } from "#shared/weather"
+import { type OpenMeteoLocation } from "#features/weather"
 
 import { type REGION } from "./constants"
 

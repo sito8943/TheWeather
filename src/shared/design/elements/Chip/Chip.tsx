@@ -3,7 +3,7 @@ import { Pressable } from "react-native"
 
 import Typography from "#design/elements/Typography"
 import { shapes, spacing, type ThemeColors } from "#design/foundations"
-import { useThemedStyles } from "#shared/settings"
+import { useThemedStyles } from "#features/settings"
 
 import { type ChipProps } from "./types"
 

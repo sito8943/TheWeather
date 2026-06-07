@@ -1,7 +1,7 @@
 import { router } from "expo-router"
 import { useCallback } from "react"
 
-import { type Location, useSavedLocations } from "#shared/locations"
+import { type Location, useSavedLocations } from "#features/locations"
 import { useIsOnline } from "#shared/network"
 
 import useCurrentLocation from "./useCurrentLocation"

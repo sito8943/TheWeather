@@ -7,7 +7,7 @@ import {
   spacing,
   type ThemeColors,
 } from "#design/foundations"
-import { useThemedStyles } from "#shared/settings"
+import { useThemedStyles } from "#features/settings"
 
 import { type CardProps } from "./types"
 
