@@ -10,6 +10,7 @@ const config: KnipConfiguration = {
     "@expo/vector-icons",
     "eslint-config-expo",
   ],
+  ignoreBinaries: ["eas-cli"],
   // Each modlet's index.ts is its public API surface. Treating barrels as
   // entries stops knip flagging re-exports only consumed inside the feature,
   // while non-index implementation files are still checked for dead exports.

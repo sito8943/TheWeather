@@ -6,6 +6,8 @@ import { useThemeColors } from "#shared/settings"
 
 export default function Layout(): ReactElement {
   const colors = useThemeColors()
+  const resolveIconColor = (color: unknown): string | undefined =>
+    typeof color === "string" ? color : undefined
 
   return (
     <Tabs
@@ -25,7 +27,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Home",
           tabBarIcon: ({ color, size }) => (
-            <Icon color={color} icon="home" size={size} />
+            <Icon color={resolveIconColor(color)} icon="home" size={size} />
           ),
         }}
       />
@@ -34,7 +36,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Search",
           tabBarIcon: ({ color, size }) => (
-            <Icon color={color} icon="search" size={size} />
+            <Icon color={resolveIconColor(color)} icon="search" size={size} />
           ),
         }}
       />
@@ -43,7 +45,7 @@ export default function Layout(): ReactElement {
         options={{
           title: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <Icon color={color} icon="settings" size={size} />
+            <Icon color={resolveIconColor(color)} icon="settings" size={size} />
           ),
         }}
       />
