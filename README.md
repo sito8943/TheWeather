@@ -37,7 +37,7 @@ Each feature or shared module has its own `index.ts` entry point. Other parts of
 
 ### Requirements
 
-- Node.js 22.x recommended
+- Node.js 24.x (see `.nvmrc` — run `nvm use`)
 - npm
 - An Android emulator, iOS simulator, Expo Go, or an Expo development build
 
